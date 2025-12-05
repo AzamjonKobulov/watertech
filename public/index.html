@@ -274,13 +274,13 @@
         style="display: none"
         @click.stop
       >
-        <div class="p-6 space-y-6">
+        <div class="relative p-6 space-y-6">
           <!-- Mobile Menu Header -->
           <div class="flex justify-between items-center">
             <img src="./assets/svgs/logo-mobile.svg" alt="Logo" />
             <button
               @click="mobileMenuOpen = false"
-              class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              class="absolute top-2 right-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <svg
                 width="24"
