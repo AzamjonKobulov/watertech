@@ -9,6 +9,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+    <!-- Fancybox CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+    />
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -258,7 +263,7 @@
       x-transition:leave="transition ease-in duration-200"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      class="lg:hidden fixed inset-0 bg-black/50 z-[9999]"
+      class="lg:hidden fixed inset-0 bg-black/50 z-[60]"
       style="display: none"
       @click="mobileMenuOpen = false"
     >
@@ -270,7 +275,7 @@
         x-transition:leave="transition ease-in duration-200 transform"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="translate-x-full"
-        class="fixed right-0 top-0 h-full w-80 bg-white shadow-xl z-[10000] overflow-y-auto"
+        class="fixed right-0 top-0 h-full w-80 bg-white shadow-xl z-[70] overflow-y-auto"
         style="display: none"
         @click.stop
       >
@@ -865,7 +870,11 @@
                 <button
                   type="button"
                   @click="open = !open"
-                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  :class="{
+                    'text-brand-body': selected !== 'Звонок, telegram, Whats App',
+                    'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
+                  }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -951,7 +960,11 @@
                 <button
                   type="button"
                   @click="open = !open"
-                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  :class="{
+                    'text-brand-body': selected !== 'Как можно скорее',
+                    'text-brand-gray-300': selected === 'Как можно скорее'
+                  }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -1724,11 +1737,18 @@
                   <div class="swiper-slide">
                     <div class="relative flex-center p-4 md:p-6">
                       <!-- Brand -->
-                      <img :src="license.license" :alt="license.alt" />
+                      <a
+                        :href="license.license"
+                        :data-fancybox="'licenses'"
+                        :data-caption="license.alt"
+                        class="cursor-pointer"
+                      >
+                        <img :src="license.license" :alt="license.alt" />
+                      </a>
                       <img
                         src="./assets/images/frame.png"
                         alt="Frame"
-                        class="absolute size-full"
+                        class="absolute size-full pointer-events-none"
                       />
                     </div>
                   </div>
@@ -1864,11 +1884,18 @@
                   <div class="swiper-slide">
                     <div class="relative flex-center p-4 md:p-6">
                       <!-- Brand -->
-                      <img :src="review.review" :alt="review.alt" />
+                      <a
+                        :href="review.review"
+                        :data-fancybox="'reviews'"
+                        :data-caption="review.alt"
+                        class="cursor-pointer"
+                      >
+                        <img :src="review.review" :alt="review.alt" />
+                      </a>
                       <img
                         src="./assets/images/frame.png"
                         alt="Frame"
-                        class="absolute size-full"
+                        class="absolute size-full pointer-events-none"
                       />
                     </div>
                   </div>
@@ -2187,7 +2214,11 @@
                 <button
                   type="button"
                   @click="open = !open"
-                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  :class="{
+                    'text-brand-body': selected !== 'Как можно скорее',
+                    'text-brand-gray-300': selected === 'Как можно скорее'
+                  }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -2278,7 +2309,11 @@
                 <button
                   type="button"
                   @click="open = !open"
-                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  :class="{
+                    'text-brand-body': selected !== 'Как можно скорее',
+                    'text-brand-gray-300': selected === 'Как можно скорее'
+                  }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -2513,6 +2548,62 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="./js/script.js"></script>
+    <script>
+      // Initialize Fancybox for licenses and reviews
+      function initFancybox() {
+        if (typeof Fancybox !== "undefined") {
+          // Unbind existing to avoid duplicates
+          Fancybox.unbind('[data-fancybox="licenses"]');
+          Fancybox.unbind('[data-fancybox="reviews"]');
+
+          // Bind Fancybox
+          Fancybox.bind('[data-fancybox="licenses"]', {
+            Toolbar: {
+              display: {
+                left: [],
+                middle: [],
+                right: ["close"],
+              },
+            },
+          });
+          Fancybox.bind('[data-fancybox="reviews"]', {
+            Toolbar: {
+              display: {
+                left: [],
+                middle: [],
+                right: ["close"],
+              },
+            },
+          });
+        }
+      }
+
+      // Wait for Alpine.js and Fancybox to be ready
+      function waitAndInitFancybox() {
+        if (typeof Fancybox !== "undefined" && typeof Alpine !== "undefined") {
+          // Wait for Alpine to finish initializing
+          Alpine.nextTick(() => {
+            setTimeout(initFancybox, 200);
+          });
+        } else {
+          setTimeout(waitAndInitFancybox, 50);
+        }
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", waitAndInitFancybox);
+      } else {
+        waitAndInitFancybox();
+      }
+
+      // Reinitialize when Alpine finishes initializing
+      document.addEventListener("alpine:init", () => {
+        setTimeout(initFancybox, 300);
+      });
+    </script>
   </body>
 </html>
