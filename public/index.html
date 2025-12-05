@@ -1496,6 +1496,37 @@
                   }
                 });
               },
+              scrollTabIntoView(tabId, event) {
+                this.activeTab = tabId;
+                
+                // Only scroll on mobile/small screens where scrolling is active
+                if (window.innerWidth >= 1024) return;
+                
+                // Wait for DOM update, then scroll
+                this.$nextTick(() => {
+                  const tabButton = event.target.closest('button');
+                  const scrollContainer = this.$refs.tabsContainer;
+                  
+                  if (tabButton && scrollContainer) {
+                    const tabLi = tabButton.closest('li');
+                    if (tabLi) {
+                      // Get the ul parent
+                      const ul = tabLi.parentElement;
+                      // Calculate button's position relative to ul
+                      const buttonOffset = tabLi.offsetLeft;
+                      // Get container padding (px-4 = 16px)
+                      const containerPadding = 16;
+                      // Scroll to align button with left edge (where first tab is)
+                      const targetScroll = buttonOffset - containerPadding;
+                      
+                      scrollContainer.scrollTo({
+                        left: Math.max(0, targetScroll),
+                        behavior: 'smooth'
+                      });
+                    }
+                  }
+                });
+              },
               init() {
                 // Watch for tab changes and reinitialize swiper
                 this.$watch('activeTab', () => {
@@ -1509,6 +1540,7 @@
           >
             <!-- Tab Buttons -->
             <div
+              x-ref="tabsContainer"
               class="overflow-x-auto -mx-4 px-4 mb-8 lg:overflow-visible lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             >
               <ul
@@ -1517,7 +1549,7 @@
                 <template x-for="tab in tabs" :key="tab.id">
                   <li class="shrink-0">
                     <button
-                      @click="activeTab = tab.id"
+                      @click="scrollTabIntoView(tab.id, $event)"
                       class="h-9 relative hover:text-brand-sky-200 smooth transition-colors duration-200 pb-6 whitespace-nowrap"
                       :class="{
                         'text-brand-sky-200': activeTab === tab.id,
@@ -1690,7 +1722,7 @@
               <div class="swiper-wrapper">
                 <template x-for="license in licenses" :key="license.id">
                   <div class="swiper-slide">
-                    <div class="relative flex-center p-6">
+                    <div class="relative flex-center p-4 md:p-6">
                       <!-- Brand -->
                       <img :src="license.license" :alt="license.alt" />
                       <img
@@ -1830,7 +1862,7 @@
               <div class="swiper-wrapper">
                 <template x-for="review in reviews" :key="review.id">
                   <div class="swiper-slide">
-                    <div class="relative flex-center p-6">
+                    <div class="relative flex-center p-4 md:p-6">
                       <!-- Brand -->
                       <img :src="review.review" :alt="review.alt" />
                       <img
