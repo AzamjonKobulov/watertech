@@ -54,7 +54,7 @@
   }
 
   body {
-    @apply font-montserrat tracking-[-1.5%] pb-100;
+    @apply font-montserrat tracking-[-1.5%];
   }
 
   h2 {

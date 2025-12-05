@@ -21,6 +21,7 @@
       scrollThreshold: 100,
       shadowThreshold: 200,
       showShadow: false,
+      mobileMenuOpen: false,
       init() {
         this.lastScroll = window.pageYOffset || document.documentElement.scrollTop;
         window.addEventListener('scroll', () => {
@@ -65,9 +66,9 @@
           </a>
 
           <div class="flex items-center gap-6">
-            <!-- Languages Dropdown -->
+            <!-- Languages Dropdown (Desktop only) -->
             <div
-              class="hidden sm:block lg:pt-2.5 relative"
+              class="hidden lg:block lg:pt-2.5 relative"
               x-data="{
                 open: false,
                 selected: {
@@ -161,8 +162,34 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button class="lg:hidden">
-              <img src="./assets/svgs/hamburger.svg" alt="Menu Button" />
+            <button
+              @click="mobileMenuOpen = !mobileMenuOpen"
+              class="lg:hidden"
+              :aria-expanded="mobileMenuOpen"
+            >
+              <img
+                src="./assets/svgs/hamburger.svg"
+                alt="Menu Button"
+                x-show="!mobileMenuOpen"
+              />
+              <svg
+                x-show="mobileMenuOpen"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="transition-opacity duration-200"
+                style="display: none"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -222,6 +249,202 @@
       </nav>
     </header>
 
+    <!-- Mobile Menu -->
+    <div
+      x-show="mobileMenuOpen"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+      class="lg:hidden fixed inset-0 bg-black/50 z-[9999]"
+      style="display: none"
+      @click="mobileMenuOpen = false"
+    >
+      <div
+        x-show="mobileMenuOpen"
+        x-transition:enter="transition ease-out duration-300 transform"
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in duration-200 transform"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full"
+        class="fixed right-0 top-0 h-full w-80 bg-white shadow-xl z-[10000] overflow-y-auto"
+        style="display: none"
+        @click.stop
+      >
+        <div class="p-6 space-y-6">
+          <!-- Mobile Menu Header -->
+          <div class="flex justify-between items-center">
+            <img src="./assets/svgs/logo-mobile.svg" alt="Logo" />
+            <button
+              @click="mobileMenuOpen = false"
+              class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Navigation Links -->
+          <nav class="space-y-2">
+            <a
+              href="./index.html"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >Главная</a
+            >
+            <a
+              href="#"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >О компании</a
+            >
+            <a
+              href="#"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >Проектное управление</a
+            >
+            <a
+              href="#"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >Инжиниринг и проектирование</a
+            >
+            <a
+              href="#"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >Наши проекты</a
+            >
+            <a
+              href="#"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >Оборудование</a
+            >
+            <a
+              href="#"
+              class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              @click="mobileMenuOpen = false"
+              >Контакты</a
+            >
+          </nav>
+
+          <!-- Language Dropdown (Mobile) -->
+          <div
+            class="pt-4 border-t border-gray-200"
+            x-data="{
+                open: false,
+                selected: {
+                  code: 'en',
+                  name: 'English (US)',
+                  flag: './assets/svgs/flag-us.svg'
+                },
+                languages: [
+                  {
+                    code: 'en',
+                    name: 'English (US)',
+                    flag: './assets/svgs/flag-us.svg'
+                  },
+                  {
+                    code: 'ru',
+                    name: 'Русский',
+                    flag: './assets/svgs/flag-us.svg'
+                  },
+                  {
+                    code: 'kz',
+                    name: 'Қазақша',
+                    flag: './assets/svgs/flag-us.svg'
+                  }
+                ],
+                selectLanguage(lang) {
+                  this.selected = lang;
+                  this.open = false;
+                }
+              }"
+            @click.away="open = false"
+          >
+            <span class="block text-sm font-medium text-gray-700 mb-3"
+              >Язык</span
+            >
+            <button
+              type="button"
+              @click="open = !open"
+              class="w-full flex items-center justify-between gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <div class="flex items-center gap-2">
+                <img :src="selected.flag" :alt="selected.name" class="size-4" />
+                <span
+                  class="text-brand-body font-medium text-sm"
+                  x-text="selected.name"
+                ></span>
+              </div>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                :class="{ 'rotate-180': open }"
+                class="transition-transform duration-200"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.46967 12.5303C8.76256 12.8232 9.23744 12.8232 9.53033 12.5303L14.7803 7.28033C15.0732 6.98744 15.0732 6.51256 14.7803 6.21967C14.4874 5.92678 14.0126 5.92678 13.7197 6.21967L9 10.9393L4.28033 6.21967C3.98744 5.92678 3.51256 5.92678 3.21967 6.21967C2.92678 6.51256 2.92678 6.98744 3.21967 7.28033L8.46967 12.5303Z"
+                  fill="#4A5565"
+                />
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div
+              x-show="open"
+              x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 transform scale-95"
+              x-transition:enter-end="opacity-100 transform scale-100"
+              x-transition:leave="transition ease-in duration-150"
+              x-transition:leave-start="opacity-100 transform scale-100"
+              x-transition:leave-end="opacity-0 transform scale-95"
+              class="mt-2 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200"
+              style="display: none"
+            >
+              <template x-for="lang in languages" :key="lang.code">
+                <button
+                  type="button"
+                  @click="selectLanguage(lang)"
+                  class="w-full flex items-center gap-2 px-4 py-3 text-left transition-colors duration-150"
+                  :class="{
+                      'bg-brand-sky-200 text-white': selected.code === lang.code,
+                      'text-brand-body hover:bg-brand-sky-200 hover:text-white': selected.code !== lang.code
+                    }"
+                >
+                  <img :src="lang.flag" :alt="lang.name" class="size-4" />
+                  <span class="font-medium text-sm" x-text="lang.name"></span>
+                </button>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- MAIN -->
     <main>
       <!-- Hero -->
@@ -267,7 +490,7 @@
       <!-- Areas of Activity -->
       <section
         id="areas-of-activity"
-        class="bg-areas-of-activity relative -mt-66 pb-40"
+        class="bg-areas-of-activity relative -mt-66 pb-12 sm:pb-16 md:pb-24 lg:pb-40"
       >
         <div class="space-y-10 lg:space-y-16">
           <!-- <div
@@ -405,7 +628,48 @@
                 year: '2008 г.',
                 link: '#'
               }
-            ]
+            ],
+            projectsSwiper: null,
+            initProjectsSwiper() {
+              if (window.innerWidth >= 1024) {
+                if (this.projectsSwiper) {
+                  this.projectsSwiper.destroy(true, true);
+                  this.projectsSwiper = null;
+                }
+                return;
+              }
+              this.$nextTick(() => {
+                const swiperWrapper = this.$refs.projectsSwiper?.querySelector('.swiper-wrapper');
+                if (swiperWrapper && swiperWrapper.children.length > 0 && !this.projectsSwiper) {
+                  if (typeof Swiper !== 'undefined') {
+                    this.projectsSwiper = new Swiper(this.$refs.projectsSwiper, {
+                      slidesPerView: 1,
+                      spaceBetween: 24,
+                      breakpoints: {
+                        640: {
+                          slidesPerView: 2,
+                          spaceBetween: 24,
+                        },
+                      },
+                      navigation: {
+                        nextEl: '#projects-swiper-next',
+                        prevEl: '#projects-swiper-prev',
+                      },
+                    });
+                  }
+                }
+              });
+            },
+            init() {
+              this.initProjectsSwiper();
+              let resizeTimer;
+              window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                  this.initProjectsSwiper();
+                }, 250);
+              });
+            }
           }"
         >
           <div>
@@ -451,7 +715,10 @@
 
           <!-- Swiper Slider for below lg: breakpoint -->
           <div class="lg:hidden mt-8 sm:mt-20">
-            <div class="swiper projects-swiper overflow-visible!">
+            <div
+              class="swiper projects-swiper overflow-visible!"
+              x-ref="projectsSwiper"
+            >
               <div class="swiper-wrapper">
                 <template x-for="project in projects" :key="project.id">
                   <div class="swiper-slide">
@@ -545,11 +812,6 @@
         id="lets-discuss-your-task"
         class="relative bg-water bg-no-repeat bg-cover pb-60 pt-40 2xl:pt-100"
       >
-        <!-- <img
-          src="./assets/images/water-2.png"
-          alt="Water Image"
-          class="absolute top-0 w-[200%] 2xl:w-full object-cover -z-10"
-        /> -->
         <div class="container-base">
           <h2 class="text-[28px]/8.5 text-center font-bold text-white">
             Давайте обсудим Вашу задачу
@@ -879,7 +1141,10 @@
       </section>
 
       <!-- Company Philosophy -->
-      <section id="company-philosophy" class="relative -mt-5">
+      <section
+        id="company-philosophy"
+        class="relative -mt-5 pb-16 sm:pb-24 md:pb-34"
+      >
         <div class="container-base">
           <div class="relative z-20 space-y-5">
             <h2>Философия компании</h2>
@@ -927,7 +1192,1293 @@
           </div>
         </div>
       </section>
+
+      <!-- Partners -->
+      <section id="partners" class="pb-16 sm:pb-24">
+        <div class="container-base">
+          <div
+            class="flex-between flex-col sm:flex-row items-start gap-6 sm:gap-12"
+          >
+            <div class="space-y-5">
+              <h2>Наши партнеры</h2>
+              <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+            </div>
+
+            <div class="flex-base gap-12">
+              <div
+                class="w-0.75 h-28 shrink-0 hidden sm:block bg-brand-sky-300"
+              ></div>
+              <p class="max-w-185 sm:text-xl lg:text-2xl/10 font-light">
+                Надёжное партнёрство — основа устойчивого роста. Мы благодарны
+                каждому из наших клиентов за доверие и совместные достижения.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="relative mt-24 lg:px-24 2xl:px-12"
+            x-data="{
+              partners: [
+                {
+                  id: 1,
+                  brand: './assets/images/partner-1.png',
+                  flag: './assets/images/partner-1-flag.png',
+                  alt: 'Partner 1'
+                },
+                {
+                  id: 2,
+                  brand: './assets/images/partner-2.png',
+                  flag: './assets/images/partner-2-flag.png',
+                  alt: 'Partner 2'
+                },
+                {
+                  id: 3,
+                  brand: './assets/images/partner-3.png',
+                  flag: './assets/images/partner-3-flag.png',
+                  alt: 'Partner 3'
+                },
+                {
+                  id: 4,
+                  brand: './assets/images/partner-1.png',
+                  flag: './assets/images/partner-1-flag.png',
+                  alt: 'Partner 1'
+                },
+                {
+                  id: 5,
+                  brand: './assets/images/partner-2.png',
+                  flag: './assets/images/partner-2-flag.png',
+                  alt: 'Partner 2'
+                },
+                {
+                  id: 6,
+                  brand: './assets/images/partner-3.png',
+                  flag: './assets/images/partner-3-flag.png',
+                  alt: 'Partner 3'
+                },
+              ],
+              swiper: null,
+              init() {
+                this.$nextTick(() => {
+                  if (typeof Swiper !== 'undefined') {
+                    this.swiper = new Swiper(this.$refs.partnersSwiper, {
+                      slidesPerView: 1,
+                      spaceBetween: 24,
+                      breakpoints: {
+                        0: {
+                          slidesPerView: 2,
+                          spaceBetween: 24,
+                        },
+                        640: {
+                          slidesPerView: 2,
+                          spaceBetween: 24,
+                        },
+                        768: {
+                          slidesPerView: 3,
+                          spaceBetween: 48,
+                        },
+                        1024: {
+                          slidesPerView: 3,
+                          spaceBetween: 96,
+                        },
+                      },
+                      navigation: {
+                        nextEl: this.$refs.partnersNext,
+                        prevEl: this.$refs.partnersPrev,
+                      },
+                    });
+                  }
+                });
+              }
+            }"
+          >
+            <div class="swiper partners-swiper" x-ref="partnersSwiper">
+              <div class="swiper-wrapper">
+                <template x-for="partner in partners" :key="partner.id">
+                  <div class="swiper-slide">
+                    <div class="h-40 relative flex-center">
+                      <!-- Brand -->
+                      <img :src="partner.brand" :alt="partner.alt" />
+
+                      <!-- Flag -->
+                      <img
+                        :src="partner.flag"
+                        alt="Flag"
+                        class="absolute top-0 right-0"
+                      />
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <!-- Custom Navigation Buttons -->
+            <div
+              class="lg:absolute top-1/2 -translate-y-1/2 left-0 w-full flex-center lg:flex-between gap-4 pointer-events-none z-10 mt-10 lg:mt-0"
+            >
+              <button
+                x-ref="partnersPrev"
+                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-ml-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-3.5 sm:size-auto"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M6.40976 11.1681C6.06654 10.8249 6.06654 10.2684 6.40976 9.92518L12.562 3.77293C12.9052 3.42971 13.4617 3.42971 13.805 3.77293C14.1482 4.11616 14.1482 4.67265 13.805 5.01588L8.27418 10.5467L13.805 16.0774C14.1482 16.4207 14.1482 16.9771 13.805 17.3204C13.4617 17.6636 12.9052 17.6636 12.562 17.3204L6.40976 11.1681Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+              <button
+                x-ref="partnersNext"
+                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-mr-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-3.5 sm:size-auto"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M14.6837 9.92529C15.027 10.2685 15.027 10.825 14.6837 11.1682L8.53149 17.3205C8.18827 17.6637 7.63178 17.6637 7.28855 17.3205C6.94532 16.9773 6.94532 16.4208 7.28855 16.0775L12.8193 10.5468L7.28855 5.01599C6.94532 4.67276 6.94532 4.11628 7.28855 3.77305C7.63178 3.42982 8.18827 3.42982 8.53149 3.77305L14.6837 9.92529Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clients -->
+      <section id="client" class="pb-16 lg:pb-24 xl:pb-40">
+        <div class="container-base">
+          <div class="space-y-5">
+            <h2>Наши клиенты</h2>
+            <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+          </div>
+
+          <!-- Tabs -->
+          <div
+            class="mt-12"
+            x-data="{
+              activeTab: 'category1',
+              tabs: [
+                { id: 'category1', label: 'Химия' },
+                { id: 'category2', label: 'Нефтепереработка и нефтехимия' },
+                { id: 'category3', label: 'Энергетика' },
+                { id: 'category4', label: 'ЖКХ' },
+                { id: 'category5', label: 'Металлургия' },
+              ],
+              categories: {
+                category1: [
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                ],
+                category2: [
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                ],
+                category3: [
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                ],
+                category4: [
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                ],
+                category5: [
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                  { id: 1, brand: './assets/images/client-1.png', alt: 'Brand 1' },
+                  { id: 2, brand: './assets/images/client-2.png', alt: 'Brand 2' },
+                  { id: 3, brand: './assets/images/client-3.png', alt: 'Brand 3' },
+                  { id: 4, brand: './assets/images/client-4.png', alt: 'Brand 4' },
+                  { id: 5, brand: './assets/images/client-5.png', alt: 'Brand 5' },
+                  { id: 6, brand: './assets/images/client-6.png', alt: 'Brand 6' },
+                ],
+              },
+              get filteredBrands() {
+                return this.categories[this.activeTab] || [];
+              },
+              swiper: null,
+              initSwiper() {
+                if (typeof Swiper === 'undefined') return;
+                
+                // Destroy existing swiper if it exists
+                if (this.swiper) {
+                  this.swiper.destroy(true, true);
+                  this.swiper = null;
+                }
+                
+                // Wait for Alpine to update the DOM
+                this.$nextTick(() => {
+                  if (this.$refs.brandsSwiper) {
+                    this.swiper = new Swiper(this.$refs.brandsSwiper, {
+                      slidesPerView: 3,
+                      spaceBetween: 12,
+                      breakpoints: {
+                        640: {
+                          slidesPerView: 3,
+                          spaceBetween: 24,
+                        },
+                        768: {
+                          slidesPerView: 4,
+                          spaceBetween: 48,
+                        },
+                        1024: {
+                          slidesPerView: 5,
+                          spaceBetween: 48,
+                        },
+                        1280: {
+                          slidesPerView: 6,
+                          spaceBetween: 48,
+                        },
+                      },
+                      navigation: {
+                        nextEl: this.$refs.brandsNext,
+                        prevEl: this.$refs.brandsPrev,
+                      },
+                    });
+                  }
+                });
+              },
+              init() {
+                // Watch for tab changes and reinitialize swiper
+                this.$watch('activeTab', () => {
+                  this.initSwiper();
+                });
+                
+                // Initialize swiper on mount
+                this.initSwiper();
+              }
+            }"
+          >
+            <!-- Tab Buttons -->
+            <div
+              class="overflow-x-auto -mx-4 px-4 mb-8 lg:overflow-visible lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            >
+              <ul
+                class="flex flex-nowrap lg:flex-wrap gap-6 lg:gap-10 font-light text-xs xl:text-sm min-w-max lg:min-w-0"
+              >
+                <template x-for="tab in tabs" :key="tab.id">
+                  <li class="shrink-0">
+                    <button
+                      @click="activeTab = tab.id"
+                      class="h-9 relative hover:text-brand-sky-200 smooth transition-colors duration-200 pb-6 whitespace-nowrap"
+                      :class="{
+                        'text-brand-sky-200': activeTab === tab.id,
+                        'text-brand-body': activeTab !== tab.id
+                      }"
+                    >
+                      <span x-text="tab.label"></span>
+                      <!-- Bottom Animation Line -->
+                      <span
+                        class="absolute left-1/2 -translate-x-1/2 w-full h-0.75 bg-brand-sky-300 transition-transform duration-300 origin-center"
+                        :class="{
+                          'scale-x-0': activeTab !== tab.id,
+                          'scale-x-100': activeTab === tab.id
+                        }"
+                        style="bottom: 0"
+                      ></span>
+                    </button>
+                  </li>
+                </template>
+              </ul>
+            </div>
+
+            <!-- Swiper -->
+            <div class="relative mt-4 lg:mt-8 lg:px-24 2xl:px-12">
+              <div class="swiper brands-swiper" x-ref="brandsSwiper">
+                <div class="swiper-wrapper">
+                  <template
+                    x-for="(brand, index) in filteredBrands"
+                    :key="`${activeTab}-${index}`"
+                  >
+                    <div class="swiper-slide">
+                      <div class="h-28 sm:h-40 flex-center">
+                        <img :src="brand.brand" :alt="brand.alt" />
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Custom Navigation Buttons -->
+              <div
+                class="lg:absolute top-1/2 -translate-y-1/2 left-0 w-full flex-center lg:flex-between gap-4 pointer-events-none z-10 mt-10 lg:mt-0"
+              >
+                <button
+                  x-ref="brandsPrev"
+                  class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-ml-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+                >
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 22 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-3.5 sm:size-auto"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M6.40976 11.1681C6.06654 10.8249 6.06654 10.2684 6.40976 9.92518L12.562 3.77293C12.9052 3.42971 13.4617 3.42971 13.805 3.77293C14.1482 4.11616 14.1482 4.67265 13.805 5.01588L8.27418 10.5467L13.805 16.0774C14.1482 16.4207 14.1482 16.9771 13.805 17.3204C13.4617 17.6636 12.9052 17.6636 12.562 17.3204L6.40976 11.1681Z"
+                      fill="white"
+                    />
+                  </svg>
+                </button>
+                <button
+                  x-ref="brandsNext"
+                  class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-mr-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+                >
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 22 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-3.5 sm:size-auto"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M14.6837 9.92529C15.027 10.2685 15.027 10.825 14.6837 11.1682L8.53149 17.3205C8.18827 17.6637 7.63178 17.6637 7.28855 17.3205C6.94532 16.9773 6.94532 16.4208 7.28855 16.0775L12.8193 10.5468L7.28855 5.01599C6.94532 4.67276 6.94532 4.11628 7.28855 3.77305C7.63178 3.42982 8.18827 3.42982 8.53149 3.77305L14.6837 9.92529Z"
+                      fill="white"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Licenses -->
+      <section id="licenses" class="relative pb-16 sm:pb-24">
+        <img
+          src="./assets/images/bg-license.png"
+          alt="Bg Licenses"
+          class="absolute top-0 left-0 -z-10 w-full h-full object-cover 2xl:object-fill"
+        />
+        <div class="container-base space-y-9 lg:space-y-17">
+          <div class="space-y-5">
+            <h2>Лицензии</h2>
+            <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+          </div>
+
+          <div
+            class="relative lg:px-12"
+            x-data="{
+              licenses: [
+                {
+                  id: 1,
+                  license: './assets/images/license.png',
+                  alt: 'License 1'
+                },
+                {
+                  id: 2,
+                  license: './assets/images/license.png',
+                  alt: 'License 2'
+                },
+                {
+                  id: 3,
+                  license: './assets/images/license.png',
+                  alt: 'License 3'
+                },
+                {
+                  id: 4,
+                  license: './assets/images/license.png',
+                  alt: 'License 4'
+                },
+                {
+                  id: 5,
+                  license: './assets/images/license.png',
+                  alt: 'License 5'
+                },
+                {
+                  id: 6,
+                  license: './assets/images/license.png',
+                  alt: 'License 6'
+                },
+              ],
+              swiper: null,
+              init() {
+                this.$nextTick(() => {
+                  if (typeof Swiper !== 'undefined') {
+                    this.swiper = new Swiper(this.$refs.licensesSwiper, {
+                      slidesPerView: 2,
+                      spaceBetween: 16,
+                      breakpoints: {
+                        640: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        768: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                        1024: {
+                          slidesPerView: 4,
+                          spaceBetween: 20,
+                        },
+                      },
+                      navigation: {
+                        nextEl: this.$refs.licensesNext,
+                        prevEl: this.$refs.licensesPrev,
+                      },
+                    });
+                  }
+                });
+              }
+            }"
+          >
+            <div class="swiper licenses-swiper" x-ref="licensesSwiper">
+              <div class="swiper-wrapper">
+                <template x-for="license in licenses" :key="license.id">
+                  <div class="swiper-slide">
+                    <div class="relative flex-center p-6">
+                      <!-- Brand -->
+                      <img :src="license.license" :alt="license.alt" />
+                      <img
+                        src="./assets/images/frame.png"
+                        alt="Frame"
+                        class="absolute size-full"
+                      />
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <!-- Custom Navigation Buttons -->
+            <div
+              class="lg:absolute top-1/2 -translate-y-1/2 left-0 w-full flex-center lg:flex-between gap-4 pointer-events-none z-10 mt-10 lg:mt-0"
+            >
+              <button
+                x-ref="licensesPrev"
+                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-ml-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-3.5 sm:size-auto"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M6.40976 11.1681C6.06654 10.8249 6.06654 10.2684 6.40976 9.92518L12.562 3.77293C12.9052 3.42971 13.4617 3.42971 13.805 3.77293C14.1482 4.11616 14.1482 4.67265 13.805 5.01588L8.27418 10.5467L13.805 16.0774C14.1482 16.4207 14.1482 16.9771 13.805 17.3204C13.4617 17.6636 12.9052 17.6636 12.562 17.3204L6.40976 11.1681Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+              <button
+                x-ref="licensesNext"
+                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-mr-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-3.5 sm:size-auto"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M14.6837 9.92529C15.027 10.2685 15.027 10.825 14.6837 11.1682L8.53149 17.3205C8.18827 17.6637 7.63178 17.6637 7.28855 17.3205C6.94532 16.9773 6.94532 16.4208 7.28855 16.0775L12.8193 10.5468L7.28855 5.01599C6.94532 4.67276 6.94532 4.11628 7.28855 3.77305C7.63178 3.42982 8.18827 3.42982 8.53149 3.77305L14.6837 9.92529Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="pb-16 sm:pb-24">
+        <div class="container-base space-y-9 lg:space-y-17">
+          <div class="space-y-5">
+            <h2>Отзывы</h2>
+            <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+          </div>
+
+          <div
+            class="relative lg:px-12"
+            x-data="{
+              reviews: [
+                {
+                  id: 1,
+                  review: './assets/images/review.png',
+                  alt: 'Review 1'
+                },
+                {
+                  id: 2,
+                  review: './assets/images/review.png',
+                  alt: 'License 2'
+                },
+                {
+                  id: 3,
+                  review: './assets/images/review.png',
+                  alt: 'License 3'
+                },
+                {
+                  id: 4,
+                  review: './assets/images/review.png',
+                  alt: 'License 4'
+                },
+                {
+                  id: 5,
+                  review: './assets/images/review.png',
+                  alt: 'License 5'
+                },
+                {
+                  id: 6,
+                  review: './assets/images/review.png',
+                  alt: 'License 6'
+                },
+              ],
+              swiper: null,
+              init() {
+                this.$nextTick(() => {
+                  if (typeof Swiper !== 'undefined') {
+                    this.swiper = new Swiper(this.$refs.reviewsSwiper, {
+                      slidesPerView: 2,
+                      spaceBetween: 16,
+                      breakpoints: {
+                        640: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        768: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                        1024: {
+                          slidesPerView: 4,
+                          spaceBetween: 20,
+                        },
+                      },
+                      navigation: {
+                        nextEl: this.$refs.reviewsNext,
+                        prevEl: this.$refs.reviewsPrev,
+                      },
+                    });
+                  }
+                });
+              }
+            }"
+          >
+            <div class="swiper reviews-swiper" x-ref="reviewsSwiper">
+              <div class="swiper-wrapper">
+                <template x-for="review in reviews" :key="review.id">
+                  <div class="swiper-slide">
+                    <div class="relative flex-center p-6">
+                      <!-- Brand -->
+                      <img :src="review.review" :alt="review.alt" />
+                      <img
+                        src="./assets/images/frame.png"
+                        alt="Frame"
+                        class="absolute size-full"
+                      />
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <!-- Custom Navigation Buttons -->
+            <div
+              class="lg:absolute top-1/2 -translate-y-1/2 left-0 w-full flex-center lg:flex-between gap-4 pointer-events-none z-10 mt-10 lg:mt-0"
+            >
+              <button
+                x-ref="reviewsPrev"
+                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-ml-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-3.5 sm:size-auto"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M6.40976 11.1681C6.06654 10.8249 6.06654 10.2684 6.40976 9.92518L12.562 3.77293C12.9052 3.42971 13.4617 3.42971 13.805 3.77293C14.1482 4.11616 14.1482 4.67265 13.805 5.01588L8.27418 10.5467L13.805 16.0774C14.1482 16.4207 14.1482 16.9771 13.805 17.3204C13.4617 17.6636 12.9052 17.6636 12.562 17.3204L6.40976 11.1681Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+              <button
+                x-ref="reviewsNext"
+                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 2xl:-mr-12 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-3.5 sm:size-auto"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M14.6837 9.92529C15.027 10.2685 15.027 10.825 14.6837 11.1682L8.53149 17.3205C8.18827 17.6637 7.63178 17.6637 7.28855 17.3205C6.94532 16.9773 6.94532 16.4208 7.28855 16.0775L12.8193 10.5468L7.28855 5.01599C6.94532 4.67276 6.94532 4.11628 7.28855 3.77305C7.63178 3.42982 8.18827 3.42982 8.53149 3.77305L14.6837 9.92529Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- News -->
+      <section id="news" class="relative overflow-hidden lg:overflow-visible">
+        <div
+          class="container-base relative z-20"
+          x-data="{
+           news: [
+             {
+               id: 1,
+               image: './assets/images/news.png',
+               title: 'Название новости',
+               description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+               link: '#'
+             },
+             {
+               id: 2,
+               image: './assets/images/news.png',
+               title: 'Название проекта',
+               description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+               link: '#'
+             },
+             {
+               id: 3,
+               image: './assets/images/news.png',
+               title: 'Название проекта',
+               description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+               link: '#'
+             }
+           ],
+           newsSwiper: null,
+           initNewsSwiper() {
+             if (window.innerWidth >= 1024) {
+               if (this.newsSwiper) {
+                 this.newsSwiper.destroy(true, true);
+                 this.newsSwiper = null;
+               }
+               return;
+             }
+             this.$nextTick(() => {
+               const swiperWrapper = this.$refs.newsSwiper?.querySelector('.swiper-wrapper');
+               if (swiperWrapper && swiperWrapper.children.length > 0 && !this.newsSwiper) {
+                 if (typeof Swiper !== 'undefined') {
+                   this.newsSwiper = new Swiper(this.$refs.newsSwiper, {
+                     slidesPerView: 1,
+                     spaceBetween: 24,
+                     breakpoints: {
+                       640: {
+                         slidesPerView: 2,
+                         spaceBetween: 24,
+                       },
+                     },
+                     navigation: {
+                       nextEl: '#news-swiper-next',
+                       prevEl: '#news-swiper-prev',
+                     },
+                   });
+                 }
+               }
+             });
+           },
+           init() {
+             this.initNewsSwiper();
+             let resizeTimer;
+             window.addEventListener('resize', () => {
+               clearTimeout(resizeTimer);
+               resizeTimer = setTimeout(() => {
+                 this.initNewsSwiper();
+               }, 250);
+             });
+           }
+         }"
+        >
+          <div
+            class="flex-between flex-col sm:flex-row items-start gap-6 sm:gap-12"
+          >
+            <div class="space-y-5">
+              <h2>Новости</h2>
+              <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+            </div>
+
+            <div class="flex-base gap-12">
+              <div
+                class="w-0.75 h-28 shrink-0 hidden sm:block bg-brand-sky-300"
+              ></div>
+              <p class="max-w-220 sm:text-xl lg:text-2xl/10 font-light">
+                Рассказываем о важных событиях, новых проектах, плановых работах
+                и изменениях в сфере водоснабжения и водоотведения.
+              </p>
+            </div>
+          </div>
+
+          <!-- Grid Layout for lg: and above -->
+          <div class="hidden lg:grid lg:grid-cols-3 gap-6 mt-20">
+            <template x-for="news in news" :key="news.id">
+              <div class="rounded-brand-2xl shadow-project">
+                <div class="h-43 sm:h-48 overflow-hidden rounded-t-brand-2xl">
+                  <img
+                    :src="news.image"
+                    :alt="news.title"
+                    class="size-full object-cover"
+                  />
+                </div>
+                <div class="space-y-3 p-4">
+                  <h3 class="text-xl font-bold" x-text="news.title"></h3>
+                  <p class="text-xl" x-text="news.description"></p>
+                  <a
+                    :href="news.link"
+                    class="block text-lg font-bold text-brand-sky-300 hover:underline smooth mt-5"
+                    >Подробнее ></a
+                  >
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <!-- Swiper Slider for below lg: breakpoint -->
+          <div class="lg:hidden mt-8 sm:mt-20">
+            <div
+              class="swiper news-swiper overflow-visible!"
+              x-ref="newsSwiper"
+            >
+              <div class="swiper-wrapper">
+                <template x-for="news in news" :key="news.id">
+                  <div class="swiper-slide">
+                    <div class="rounded-brand-2xl shadow-project">
+                      <div
+                        class="h-55 sm:h-45 overflow-hidden rounded-t-brand-2xl"
+                      >
+                        <img
+                          :src="news.image"
+                          :alt="news.title"
+                          class="size-full object-cover"
+                        />
+                      </div>
+                      <div class="space-y-3 p-4">
+                        <h3 class="text-xl font-bold" x-text="news.title"></h3>
+                        <p class="text-xl" x-text="news.description"></p>
+                        <a
+                          :href="news.link"
+                          class="block text-lg font-bold text-brand-sky-300 hover:underline smooth mt-5"
+                          >Подробнее ></a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Swiper Custom Navigation Buttons -->
+            <div class="flex-center gap-4 mt-7">
+              <button
+                id="news-swiper-prev"
+                class="size-7.5 shrink-0 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M3.9773 6.92966C3.76433 6.71669 3.76433 6.3714 3.9773 6.15843L7.79466 2.34107C8.00762 2.12811 8.35291 2.12811 8.56588 2.34107C8.77885 2.55404 8.77885 2.89933 8.56588 3.1123L5.13413 6.54404L8.56588 9.97579C8.77885 10.1888 8.77885 10.534 8.56588 10.747C8.35291 10.96 8.00763 10.96 7.79466 10.747L3.9773 6.92966Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+              <button
+                id="news-swiper-next"
+                class="size-7.5 shrink-0 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M9.11078 6.15848C9.32375 6.37145 9.32375 6.71673 9.11078 6.9297L5.29342 10.7471C5.08046 10.96 4.73517 10.96 4.5222 10.7471C4.30923 10.5341 4.30923 10.1888 4.5222 9.97584L7.95395 6.54409L4.5222 3.11234C4.30923 2.89938 4.30923 2.55409 4.5222 2.34112C4.73517 2.12815 5.08046 2.12815 5.29342 2.34112L9.11078 6.15848Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="hidden lg:flex-center mt-16">
+            <button
+              class="h-16 w-55 text-brand-sky-300 font-bold leading-5 border border-brand-sky-300 rounded-brand-lg hover:bg-brand-sky-300 hover:text-white smooth px-8"
+            >
+              Все новости
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Any Questions? -->
+      <section
+        id="any-questions"
+        class="relative pt-80 lg:pt-60 pb-16 sm:pb-24"
+      >
+        <img
+          src="./assets/images/water-3.png"
+          alt="Water Image"
+          class="absolute top-0 w-full h-full object-cover -z-10"
+        />
+        <div class="container-base">
+          <h2 class="text-[28px]/8.5 text-center font-bold text-white">
+            Остались вопросы?
+          </h2>
+
+          <!-- Form -->
+          <div
+            class="max-w-185 mx-auto grid sm:grid-cols-2 gap-4 mt-10 2xl:mt-20"
+          >
+            <!-- Name -->
+            <label for="name" class="space-y-2.5 relative">
+              <span class="block font-medium text-white">Ваше имя?*</span>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Имя"
+                class="h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+              />
+              <!-- Error Message -->
+              <!-- <span
+                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                >Имя не может быть короче 3х символов</span
+              > -->
+            </label>
+
+            <!-- Convenient Time for a Call -->
+            <div
+              class="relative space-y-2.5"
+              x-data="{
+                open: false,
+                selected: 'Как можно скорее',
+                options: [
+                  'Утром',
+                  'Днем',
+                  'Вечером',
+                  'Ночью'
+                ],
+                selectOption(option) {
+                  this.selected = option;
+                  this.open = false;
+                }
+              }"
+              @click.away="open = false"
+            >
+              <span class="block text-left font-medium text-white"
+                >Удобное время для звонка:</span
+              >
+              <div class="relative">
+                <button
+                  type="button"
+                  @click="open = !open"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                >
+                  <span x-text="selected"></span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 16 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    :class="{ 'rotate-180': open }"
+                    class="transition-transform duration-200"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
+                      fill="#4A5565"
+                    />
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform scale-95"
+                  x-transition:enter-end="opacity-100 transform scale-100"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 transform scale-100"
+                  x-transition:leave-end="opacity-0 transform scale-95"
+                  class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
+                  style="display: none"
+                >
+                  <template x-for="option in options" :key="option">
+                    <button
+                      type="button"
+                      @click="selectOption(option)"
+                      class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
+                      :class="{ 'bg-brand-sky-200 text-white': selected === option }"
+                    >
+                      <span x-text="option"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <!-- Hidden input for form submission -->
+              <input type="hidden" name="contact_method" :value="selected" />
+            </div>
+
+            <!-- Name -->
+            <label for="name" class="space-y-2.5 relative">
+              <span class="block font-medium text-white">Ваше имя?*</span>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Имя"
+                class="h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+              />
+              <!-- Error Message -->
+              <!-- <span
+                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                >Имя не может быть короче 3х символов</span
+              > -->
+            </label>
+
+            <!-- Convenient Time for a Call -->
+            <div
+              class="relative space-y-2.5"
+              x-data="{
+                open: false,
+                selected: 'Как можно скорее',
+                options: [
+                  'Утром',
+                  'Днем',
+                  'Вечером',
+                  'Ночью'
+                ],
+                selectOption(option) {
+                  this.selected = option;
+                  this.open = false;
+                }
+              }"
+              @click.away="open = false"
+            >
+              <span class="block text-left font-medium text-white"
+                >Удобное время для звонка:</span
+              >
+              <div class="relative">
+                <button
+                  type="button"
+                  @click="open = !open"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                >
+                  <span x-text="selected"></span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 16 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    :class="{ 'rotate-180': open }"
+                    class="transition-transform duration-200"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
+                      fill="#4A5565"
+                    />
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform scale-95"
+                  x-transition:enter-end="opacity-100 transform scale-100"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 transform scale-100"
+                  x-transition:leave-end="opacity-0 transform scale-95"
+                  class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
+                  style="display: none"
+                >
+                  <template x-for="option in options" :key="option">
+                    <button
+                      type="button"
+                      @click="selectOption(option)"
+                      class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
+                      :class="{ 'bg-brand-sky-200 text-white': selected === option }"
+                    >
+                      <span x-text="option"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <!-- Hidden input for form submission -->
+              <input type="hidden" name="contact_method" :value="selected" />
+            </div>
+
+            <label class="sm:col-span-2 flex gap-2.5 text-white cursor-pointer">
+              <div
+                class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
+              >
+                <input type="checkbox" class="hidden peer" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-3 stroke-black opacity-0 peer-checked:opacity-100 smooth"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 12.75 6 6 9-13.5"
+                  />
+                </svg>
+              </div>
+
+              <span
+                >Я соглашаюсь с условиями обработки персональных данных и
+                правилами сайта</span
+              >
+            </label>
+
+            <div class="sm:col-span-2 flex-center mt-6">
+              <button
+                class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
+              >
+                Отправить
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="relative bg-brand-sky-400 text-white pt-8 pb-16">
+      <div class="container-base">
+        <!-- Top -->
+        <div class="flex-between flex-col lg:flex-row items-start gap-10">
+          <div class="">
+            <a href="#">
+              <img src="./assets/images/logo-footer.png" alt="Logo" />
+            </a>
+
+            <p class="hidden lg:block max-w-77.25 text-sm/5 font-light mt-11">
+              Юридический адрес: 188309, Ленинградская область, Гатчинский р-н,
+              г. Гатчина, ул. Генерала Кныша, д. 16, кв. 68
+            </p>
+          </div>
+
+          <div class="flex gap-16">
+            <ul class="space-y-4 text-xs xl:text-sm/5 font-light mt-6">
+              <li>
+                <a href="#" class="hover:underline">О компании</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">Проектное управление</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline"
+                  >Инжиниринг и проектирование</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:underline">Наши проекты</a>
+              </li>
+            </ul>
+
+            <ul class="space-y-4 text-sm/5 font-light mt-6">
+              <li>
+                <a href="#" class="hover:underline">Оборудование</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">Новости</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">Контакты</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex flex-col lg:items-end space-y-5 pl-10 sm:pl-0">
+            <div
+              class="flex flex-row-reverse lg:flex-row items-center gap-5.5 lg:pr-6"
+            >
+              <div class="flex item-center gap-2.5">
+                <a href="#" class="block hover:-translate-y-2 smooth">
+                  <img src="./assets/svgs/whatsapp.svg" alt="WhatsApp" />
+                </a>
+                <a href="#" class="block hover:-translate-y-2 smooth">
+                  <img src="./assets/svgs/telegram.svg" alt="Telegram" />
+                </a>
+              </div>
+              <div class="flex items-center gap-5.5">
+                <div>
+                  <img src="./assets/svgs/call.svg" alt="Call" />
+                </div>
+                <div>
+                  <p class="text-sm font-medium">Телефон</p>
+                  <a
+                    href="tel:+7 778 832 58 92"
+                    class="font-bold hover:text-brand-gray-300 smooth"
+                    >+7 778 832 58 92</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-5.5">
+              <div>
+                <img src="./assets/svgs/envelope.svg" alt="Email" />
+              </div>
+              <div>
+                <p class="text-sm font-medium">Электронная почта</p>
+                <a
+                  href="mailto:info@watertech.kz"
+                  class="font-bold hover:text-brand-gray-300 smooth"
+                  >info@watertech.kz</a
+                >
+              </div>
+            </div>
+            <div class="flex lg:hidden items-center gap-5">
+              <a href="#" class="block hover:-translate-y-2 smooth">
+                <img src="./assets/svgs/youtube.svg" alt="Youtube" />
+              </a>
+              <a href="#" class="block hover:-translate-y-2 smooth">
+                <img src="./assets/svgs/facebook.svg" alt="Facebook" />
+              </a>
+              <a href="#" class="block hover:-translate-y-2 smooth">
+                <img src="./assets/svgs/twitter.svg" alt="Twitter" />
+              </a>
+              <a href="#" class="block hover:-translate-y-2 smooth">
+                <img src="./assets/svgs/instagram.svg" alt="Instagram" />
+              </a>
+              <a href="#" class="block hover:-translate-y-2 smooth">
+                <img src="./assets/svgs/linkedin.svg" alt="Linkedin" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="flex-between items-start mt-8 lg:mt-14">
+          <div class="space-y-6">
+            <p class="lg:hidden max-w-77.25 text-sm/5 font-light">
+              Юридический адрес: 188309, Ленинградская область, Гатчинский р-н,
+              г. Гатчина, ул. Генерала Кныша, д. 16, кв. 68
+            </p>
+
+            <a href="#" class="block hover:underline"
+              >Политика конфиденциальности</a
+            >
+
+            <p class="max-w-125 text-xs">
+              Все права защищены. Законом запрещено копирование, распространение
+              или иное использование материалов с сайта без согласия
+              правообладателя. Информация сайта не является публичной офертой.
+            </p>
+          </div>
+
+          <div class="hidden lg:flex items-center gap-5">
+            <a href="#" class="block hover:-translate-y-2 smooth">
+              <img src="./assets/svgs/youtube.svg" alt="Youtube" />
+            </a>
+            <a href="#" class="block hover:-translate-y-2 smooth">
+              <img src="./assets/svgs/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="#" class="block hover:-translate-y-2 smooth">
+              <img src="./assets/svgs/twitter.svg" alt="Twitter" />
+            </a>
+            <a href="#" class="block hover:-translate-y-2 smooth">
+              <img src="./assets/svgs/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="#" class="block hover:-translate-y-2 smooth">
+              <img src="./assets/svgs/linkedin.svg" alt="Linkedin" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./js/script.js"></script>
