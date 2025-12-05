@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./styles.css" rel="stylesheet" />
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body
+    x-data="{
+      lastScroll: 0,
+      isScrollingDown: false,
+      scrollThreshold: 100,
+      shadowThreshold: 200,
+      showShadow: false,
+      init() {
+        this.lastScroll = window.pageYOffset || document.documentElement.scrollTop;
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          
+          // Show shadow when scrolled more than shadowThreshold
+          this.showShadow = currentScroll > this.shadowThreshold;
+          
+          if (currentScroll < this.scrollThreshold) {
+            this.isScrollingDown = false;
+          } else if (currentScroll > this.lastScroll) {
+            this.isScrollingDown = true;
+          } else {
+            this.isScrollingDown = false;
+          }
+          
+          this.lastScroll = currentScroll;
+        });
+      }
+    }"
+  >
+    <!-- HEADER -->
+    <header
+      class="bg-white sticky top-0 z-50 py-3 pb-4.5 lg:pt-6 transition-all duration-300 ease-in-out"
+      :class="{
+        '-translate-y-full': isScrollingDown && lastScroll > scrollThreshold,
+        'translate-y-0': !isScrollingDown || lastScroll <= scrollThreshold,
+        'shadow-[0_4px_20px_rgba(0,0,0,0.08)]': showShadow
+      }"
+    >
+      <nav class="container-base sm:space-y-7">
+        <!-- Logo & Languages -->
+        <div class="flex justify-between items-end lg:items-start">
+          <!-- Logo -->
+          <a href="./index.html" class="hidden lg:block">
+            <img src="./assets/svgs/logo.svg" alt="Logo" />
+          </a>
+
+          <!-- Logo Mobile -->
+          <a href="./index.html" class="lg:hidden">
+            <img src="./assets/svgs/logo-mobile.svg" alt="Logo Mobile" />
+          </a>
+
+          <div class="flex items-center gap-6">
+            <!-- Languages Dropdown -->
+            <div
+              class="hidden sm:block lg:pt-2.5 relative"
+              x-data="{
+                open: false,
+                selected: {
+                  code: 'en',
+                  name: 'English (US)',
+                  flag: './assets/svgs/flag-us.svg'
+                },
+                languages: [
+                  {
+                    code: 'en',
+                    name: 'English (US)',
+                    flag: './assets/svgs/flag-us.svg'
+                  },
+                  {
+                    code: 'ru',
+                    name: 'Русский',
+                    flag: './assets/svgs/flag-us.svg'
+                  },
+                  {
+                    code: 'kz',
+                    name: 'Қазақша',
+                    flag: './assets/svgs/flag-us.svg'
+                  }
+                ],
+                selectLanguage(lang) {
+                  this.selected = lang;
+                  this.open = false;
+                  // Here you can add language switching logic
+                  // window.location.href = `?lang=${lang.code}`;
+                }
+              }"
+              @click.away="open = false"
+            >
+              <button
+                type="button"
+                @click="open = !open"
+                class="group flex items-center gap-1.5"
+              >
+                <img :src="selected.flag" :alt="selected.name" class="size-4" />
+
+                <span
+                  class="text-brand-body font-medium text-sm"
+                  x-text="selected.name"
+                ></span>
+
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  :class="{ 'rotate-180': open }"
+                  class="transition-transform duration-200"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8.46967 12.5303C8.76256 12.8232 9.23744 12.8232 9.53033 12.5303L14.7803 7.28033C15.0732 6.98744 15.0732 6.51256 14.7803 6.21967C14.4874 5.92678 14.0126 5.92678 13.7197 6.21967L9 10.9393L4.28033 6.21967C3.98744 5.92678 3.51256 5.92678 3.21967 6.21967C2.92678 6.51256 2.92678 6.98744 3.21967 7.28033L8.46967 12.5303Z"
+                    fill="#4A5565"
+                  />
+                </svg>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 transform scale-95"
+                x-transition:enter-end="opacity-100 transform scale-100"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 transform scale-100"
+                x-transition:leave-end="opacity-0 transform scale-95"
+                class="absolute right-0 mt-2 bg-white rounded-lg shadow-lg overflow-hidden min-w-[180px] z-50"
+                style="display: none"
+              >
+                <template x-for="lang in languages" :key="lang.code">
+                  <button
+                    type="button"
+                    @click="selectLanguage(lang)"
+                    class="w-full flex items-center gap-2 px-4 py-3 text-left transition-colors duration-150 group"
+                    :class="{
+                      'bg-brand-sky-200 text-white': selected.code === lang.code,
+                      'text-brand-body hover:bg-brand-sky-200 hover:text-white': selected.code !== lang.code
+                    }"
+                  >
+                    <img :src="lang.flag" :alt="lang.name" class="size-4" />
+                    <span class="font-medium text-sm" x-text="lang.name"></span>
+                  </button>
+                </template>
+              </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden">
+              <img src="./assets/svgs/hamburger.svg" alt="Menu Button" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <ul class="hidden lg:flex-between font-light text-xs xl:text-sm">
+          <li>
+            <a
+              href="./index.html"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >Главная</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >О компании</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >Проектное управление</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >Инжиниринг и проектирование</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >Наши проекты</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >Оборудование</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="nav-link h-9 relative hover:text-brand-sky-200 smooth"
+              >Контакты</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <!-- Hero -->
+      <section id="hero" class="relative pb-80 lg:pb-127 pt-6">
+        <img
+          src="./assets/images/bg-hero.png"
+          alt="Background Hero"
+          class="absolute inset-y-0 left-0 z-10 w-full h-full object-cover 2xl:object-fill -top-20"
+        />
+        <div class="container-base relative z-20">
+          <h2 class="leading-17.5">Создаем решения для</h2>
+          <h1
+            class="uppercase font-bold text-brand-blue text-[27px]/7.5 sm:text-4xl/12 lg:text-5xl/15"
+          >
+            водоснабжения, водоотведения <br />
+            и гидротехнических объектов
+          </h1>
+          <p class="font-light leading-5 lg:text-2xl/7.5 mt-3 lg:mt-5">
+            проектируем, производим, монтируем <br />
+            и обслуживаем оборудование
+          </p>
+          <!-- Buttons -->
+          <div
+            class="max-w-70 mx-auto sm:mx-0 sm:max-w-none flex-base flex-col sm:flex-row gap-3 sm:gap-4.5 mt-28 sm:mt-10"
+          >
+            <button
+              class="w-full h-17.5 sm:w-auto bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
+            >
+              Связаться с нами
+            </button>
+            <button
+              class="w-full h-17.5 sm:w-auto bg-white font-bold text-brand-sky-300 text-xl/7.5 border border-brand-sky-100 rounded-brand-lg hover:bg-brand-sky-200 hover:text-white hover:border-brand-sky-200 smooth py-5 px-8 md:px-12"
+            >
+              Узнать о компании
+            </button>
+          </div>
+        </div>
+        <!-- <div
+          class="absolute inset-x-0 h-20 bottom-0 z-20 bg-brand-sky-50 backdrop-blur-3xl opacity-80"
+        ></div> -->
+      </section>
+
+      <!-- Areas of Activity -->
+      <section
+        id="areas-of-activity"
+        class="bg-areas-of-activity relative -mt-66 pb-40"
+      >
+        <div class="space-y-10 lg:space-y-16">
+          <!-- <div
+            class="bg-areas-of-activity h-73 absolute w-full left-0 top-44 z-10"
+          ></div>
+          <div
+            class="bg-areas-of-activity-2 h-73 absolute w-full left-0 bottom-0 z-10 rotate-180"
+          ></div> -->
+          <div class="container-base relative z-20 space-y-5">
+            <h2>Направления деятельности</h2>
+            <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+          </div>
+          <div class="bg-left -mt-18 pt-18">
+            <div
+              class="container-base relative z-20"
+              x-data="{ 
+              cards: [
+                {
+                  id: 1,
+                  icon: './assets/svgs/activity-1.svg',
+                  title: 'Сбор исходных данных',
+                  description: 'Запрашиваем и уточняем полную информацию для успешной реализации проекта. Учитываем особенности местности, окружающих населённых пунктов и предприятий, транспортную доступность. Анализирируем юридические и нормативные документы. Ускоряем рабочие процессы благодаря собственной сертифицированной лаборатории. Обращаем особое внимание на потребности и пожелания Заказчика.'
+                },
+                {
+                  id: 2,
+                  icon: './assets/svgs/activity-2.svg',
+                  title: 'Технико-экономическое обоснование',
+                  description: 'Технико-экономическое обоснование Разрабатываем документы с описанием технических решений и их возможных вариантов. Объясняем, почему будут использованы именно эти технологии. Эти документы обеспечат максимально точную оценку капитальных и эксплуатационных затрат (CAPEX и OPEX), сроков исполнения и окупаемости проекта.'
+                },
+                {
+                  id: 3,
+                  icon: './assets/svgs/activity-3.svg',
+                  title: 'Разработка проектной и исполнительной документации, ведение авторского надзора',
+                  description: 'Разрабатываем проектную и исполнительную документацию. Проектная документация содержит схемы и подробное описание строительства объекта. Исполнительная документация подтверждает соответствие проекта законам и нормативным актам. Выполняем авторский надзор: контролируем ход работ при строительстве объекта, производстве, установке и эксплуатации оборудования.'
+                },
+                {
+                  id: 4,
+                  icon: './assets/svgs/activity-4.svg',
+                  title: 'Изготовление, поставка, монтаж и запуск оборудования',
+                  description: 'Изготавливаем, доставляем и устанавливаем оборудование в строгом соответствии с документацией и потребностями Заказчика. Запускаем и контролируем корректность работы оборудования. Предоставляем пятилетнюю гарантию.'
+                },
+                {
+                  id: 5,
+                  icon: './assets/svgs/activity-5.svg',
+                  title: 'Сервис, гарантия и постгарантийное обслуживание',
+                  description: 'Обучаем сотрудников правилам корректной эксплуатации оборудования. Обеспечиваем регулярное обслуживание и контролируем исправность работы системы. Проводим профилактику поломок и ведем текущую документацию. Помогаем, если что-то идёт не так. В рамках гарантийного обслуживания сервис бесплатный. При отсутствии гарантии находим максимально эффективный способ решения проблем.'
+                }
+              ]
+            }"
+            >
+              <!-- Cards -->
+              <div
+                class="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-x-5 sm:gap-y-10"
+              >
+                <template x-for="card in cards" :key="card.id">
+                  <div
+                    class="bg-white rounded-brand-2xl shadow-box py-7 lg:py-8 px-6"
+                  >
+                    <img :src="card.icon" :alt="card.title" />
+                    <h4
+                      class="font-bold leading-5 mt-4.5 sm:mt-9"
+                      x-text="card.title"
+                    ></h4>
+                    <p
+                      class="font-light text-sm/5 mt-2.5 sm:mt-7"
+                      x-text="card.description"
+                    ></p>
+                  </div>
+                </template>
+                <div class="relative aspect-square sm:aspect-auto">
+                  <img
+                    src="./assets/svgs/water-tech-logo-icon.svg"
+                    alt="Water Tech Logo"
+                    class="w-30.5 h-27.75 lg:size-auto absolute top-5 lg:-top-5 left-1/2 z-10 -translate-x-1/2"
+                  />
+                  <div
+                    class="h-4/5 w-full lg:h-92 absolute bottom-0 shadow-box rounded-brand-2xl overflow-hidden"
+                  >
+                    <img
+                      src="./assets/images/water.png"
+                      alt="Water"
+                      class="size-full object-cover"
+                    />
+
+                    <button
+                      class="h-16 max-w-71 w-full absolute left-1/2 -translate-x-1/2 bottom-19 z-10 bg-white font-bold leading-5 border border-transparent rounded-brand-lg hover:bg-transparent hover:border-white hover:text-white smooth px-10"
+                    >
+                      Обсудим Ваш проект?
+                    </button>
+                  </div>
+                </div>
+
+                <!-- WATERTECH -->
+                <img
+                  src="./assets/svgs/watertech.svg"
+                  alt="Watertech"
+                  class="absolute -left-1/8 top-0 -z-10"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section
+        id="projects"
+        class="relative overflow-hidden lg:overflow-visible"
+      >
+        <div
+          class="container-base relative z-20"
+          x-data="{
+            projects: [
+              {
+                id: 1,
+                image: './assets/images/project-1.png',
+                title: 'Название проекта',
+                location: 'Локация',
+                year: '2008 г.',
+                link: '#'
+              },
+              {
+                id: 2,
+                image: './assets/images/project-2.png',
+                title: 'Название проекта',
+                location: 'Локация',
+                year: '2008 г.',
+                link: '#'
+              },
+              {
+                id: 3,
+                image: './assets/images/project-3.png',
+                title: 'Название проекта',
+                location: 'Локация',
+                year: '2008 г.',
+                link: '#'
+              }
+            ]
+          }"
+        >
+          <div>
+            <h2 class="max-w-6xl">
+              С 2007 года мы реализовали
+              <span class="text-brand-sky-300 font-bold"
+                >более 400 проектов.</span
+              >
+              Ниже Вы можете видеть некоторые из них
+            </h2>
+            <span class="block w-45 h-0.75 bg-brand-sky-300 mt-5"></span>
+          </div>
+
+          <!-- Grid Layout for lg: and above -->
+          <div class="hidden lg:grid lg:grid-cols-3 gap-6 mt-20">
+            <template x-for="project in projects" :key="project.id">
+              <div class="rounded-brand-2xl shadow-project">
+                <div class="h-55 sm:h-60 overflow-hidden rounded-t-brand-2xl">
+                  <img
+                    :src="project.image"
+                    :alt="project.title"
+                    class="size-full object-cover"
+                  />
+                </div>
+                <div class="p-4">
+                  <h3 class="text-2xl font-bold" x-text="project.title"></h3>
+                  <div class="flex-between mt-3">
+                    <div class="flex items-center gap-3">
+                      <img src="./assets/svgs/location.svg" alt="Location" />
+                      <span class="text-xl" x-text="project.location"></span>
+                    </div>
+                    <p class="text-xl" x-text="project.year"></p>
+                  </div>
+                  <a
+                    :href="project.link"
+                    class="block text-lg font-bold text-brand-sky-300 hover:underline smooth mt-5"
+                    >Подробнее ></a
+                  >
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <!-- Swiper Slider for below lg: breakpoint -->
+          <div class="lg:hidden mt-8 sm:mt-20">
+            <div class="swiper projects-swiper overflow-visible!">
+              <div class="swiper-wrapper">
+                <template x-for="project in projects" :key="project.id">
+                  <div class="swiper-slide">
+                    <div class="rounded-brand-2xl shadow-project">
+                      <div
+                        class="h-55 sm:h-60 overflow-hidden rounded-t-brand-2xl"
+                      >
+                        <img
+                          :src="project.image"
+                          :alt="project.title"
+                          class="size-full object-cover"
+                        />
+                      </div>
+                      <div class="p-4">
+                        <h3
+                          class="text-2xl font-bold"
+                          x-text="project.title"
+                        ></h3>
+                        <div class="flex-between mt-3">
+                          <div class="flex items-center gap-3">
+                            <img
+                              src="./assets/svgs/location.svg"
+                              alt="Location"
+                            />
+                            <span
+                              class="text-xl"
+                              x-text="project.location"
+                            ></span>
+                          </div>
+                          <p class="text-xl" x-text="project.year"></p>
+                        </div>
+                        <a
+                          :href="project.link"
+                          class="block text-lg font-bold text-brand-sky-300 hover:underline smooth mt-5"
+                          >Подробнее ></a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Swiper Custom Navigation Buttons -->
+            <div class="flex-center gap-4 mt-7">
+              <button
+                id="projects-swiper-prev"
+                class="size-7.5 shrink-0 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M3.9773 6.92966C3.76433 6.71669 3.76433 6.3714 3.9773 6.15843L7.79466 2.34107C8.00762 2.12811 8.35291 2.12811 8.56588 2.34107C8.77885 2.55404 8.77885 2.89933 8.56588 3.1123L5.13413 6.54404L8.56588 9.97579C8.77885 10.1888 8.77885 10.534 8.56588 10.747C8.35291 10.96 8.00763 10.96 7.79466 10.747L3.9773 6.92966Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+              <button
+                id="projects-swiper-next"
+                class="size-7.5 shrink-0 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M9.11078 6.15848C9.32375 6.37145 9.32375 6.71673 9.11078 6.9297L5.29342 10.7471C5.08046 10.96 4.73517 10.96 4.5222 10.7471C4.30923 10.5341 4.30923 10.1888 4.5222 9.97584L7.95395 6.54409L4.5222 3.11234C4.30923 2.89938 4.30923 2.55409 4.5222 2.34112C4.73517 2.12815 5.08046 2.12815 5.29342 2.34112L9.11078 6.15848Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Let's Discuss Your Task -->
+      <section
+        id="lets-discuss-your-task"
+        class="relative bg-water bg-no-repeat bg-cover pb-60 pt-40 2xl:pt-100"
+      >
+        <!-- <img
+          src="./assets/images/water-2.png"
+          alt="Water Image"
+          class="absolute top-0 w-[200%] 2xl:w-full object-cover -z-10"
+        /> -->
+        <div class="container-base">
+          <h2 class="text-[28px]/8.5 text-center font-bold text-white">
+            Давайте обсудим Вашу задачу
+          </h2>
+
+          <!-- Form -->
+          <div
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-5 sm:gap-y-7 lg:gap-y-14 mt-10 2xl:mt-20"
+          >
+            <!-- Name -->
+            <label for="name" class="space-y-2.5 relative">
+              <span class="block font-medium text-white">Ваше имя?*</span>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Имя"
+                class="h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+              />
+              <!-- Error Message -->
+              <span
+                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                >Имя не может быть короче 3х символов</span
+              >
+            </label>
+
+            <!-- How To Connect With You? -->
+            <div
+              class="relative space-y-2.5"
+              x-data="{
+                open: false,
+                selected: 'Звонок, telegram, Whats App',
+                options: [
+                  'Звонок, telegram, Whats App',
+                  'Звонок',
+                  'Telegram',
+                  'WhatsApp',
+                  'Email'
+                ],
+                selectOption(option) {
+                  this.selected = option;
+                  this.open = false;
+                }
+              }"
+              @click.away="open = false"
+            >
+              <span class="block text-left font-medium text-white"
+                >Как с Вами связаться?*</span
+              >
+              <div class="relative max-w-full">
+                <button
+                  type="button"
+                  @click="open = !open"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                >
+                  <span x-text="selected"></span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 16 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    :class="{ 'rotate-180': open }"
+                    class="transition-transform duration-200"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
+                      fill="#4A5565"
+                    />
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform scale-95"
+                  x-transition:enter-end="opacity-100 transform scale-100"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 transform scale-100"
+                  x-transition:leave-end="opacity-0 transform scale-95"
+                  class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
+                  style="display: none"
+                >
+                  <template x-for="option in options" :key="option">
+                    <button
+                      type="button"
+                      @click="selectOption(option)"
+                      class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
+                      :class="{ 'bg-brand-sky-200 text-white': selected === option }"
+                    >
+                      <span x-text="option"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <!-- Hidden input for form submission -->
+              <input type="hidden" name="contact_method" :value="selected" />
+            </div>
+
+            <!-- Phone -->
+            <label for="phone" class="space-y-2.5">
+              <span class="block font-medium text-white">Ваш телефон*</span>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                placeholder="+7 888 888 88 88"
+                class="w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+              />
+            </label>
+
+            <!-- Convenient Time for a Call -->
+            <div
+              class="relative space-y-2.5"
+              x-data="{
+                open: false,
+                selected: 'Как можно скорее',
+                options: [
+                  'Утром',
+                  'Днем',
+                  'Вечером',
+                  'Ночью'
+                ],
+                selectOption(option) {
+                  this.selected = option;
+                  this.open = false;
+                }
+              }"
+              @click.away="open = false"
+            >
+              <span class="block text-left font-medium text-white"
+                >Удобное время для звонка:</span
+              >
+              <div class="relative">
+                <button
+                  type="button"
+                  @click="open = !open"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-brand-gray-300 text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                >
+                  <span x-text="selected"></span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 16 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    :class="{ 'rotate-180': open }"
+                    class="transition-transform duration-200"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
+                      fill="#4A5565"
+                    />
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform scale-95"
+                  x-transition:enter-end="opacity-100 transform scale-100"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 transform scale-100"
+                  x-transition:leave-end="opacity-0 transform scale-95"
+                  class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
+                  style="display: none"
+                >
+                  <template x-for="option in options" :key="option">
+                    <button
+                      type="button"
+                      @click="selectOption(option)"
+                      class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
+                      :class="{ 'bg-brand-sky-200 text-white': selected === option }"
+                    >
+                      <span x-text="option"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <!-- Hidden input for form submission -->
+              <input type="hidden" name="contact_method" :value="selected" />
+            </div>
+
+            <!-- Message -->
+            <label for="message" class="sm:col-span-2 space-y-2.5">
+              <span class="block font-medium text-white">Текст сообщения:</span>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Текст сообщения"
+                class="h-28 lg:h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 resize-none py-5 px-7"
+              ></textarea>
+            </label>
+
+            <label
+              class="lg:col-span-3 flex gap-2.5 text-white cursor-pointer sm:-mt-10"
+            >
+              <div
+                class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
+              >
+                <input type="checkbox" class="hidden peer" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-3 stroke-black opacity-0 peer-checked:opacity-100 smooth"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 12.75 6 6 9-13.5"
+                  />
+                </svg>
+              </div>
+
+              <span
+                >Я соглашаюсь с условиями обработки персональных данных и
+                правилами сайта</span
+              >
+            </label>
+
+            <div class="lg:col-span-3 flex-center mt-6 sm:mt-0">
+              <button
+                class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
+              >
+                Отправить
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section
+        id="why-choose-us"
+        class="pb-16 sm:pb-24 md:pb-40 lg:pb-50 -mt-5 2xl:mt-20"
+      >
+        <div class="container-base">
+          <div
+            class="relative bg-brand-blue-200/90 text-white space-y-14 rounded-brand-2xl overflow-hidden p-6 lg:py-12 lg:px-16"
+          >
+            <h2 class="text-center">Почему нас выбирают?</h2>
+
+            <img
+              src="./assets/images/icon-watertech.png"
+              alt="Watertech Icon"
+              class="absolute bottom-40 -right-1/3 lg:bottom-auto lg:top-4 lg:right-11"
+            />
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Reason 1 -->
+              <div class="space-y-2 lg:space-y-4">
+                <h3
+                  class="text-[64px]/10 lg:text-[90px]/22.5 font-medium text-brand-sky-100"
+                >
+                  12
+                </h3>
+
+                <div class="space-y-2">
+                  <h4 class="text-xl/8 font-bold">12+ лет опыта</h4>
+                  <p class="text-sm/5 font-light">
+                    Средний стаж наших сотрудников — более 12 лет. Мы знаем, как
+                    решать нестандартные задачи.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Reason 2 -->
+              <div class="space-y-2 lg:space-y-4">
+                <h3
+                  class="text-[64px]/10 lg:text-[90px]/22.5 font-medium text-brand-sky-100"
+                >
+                  100+
+                </h3>
+
+                <div class="space-y-2">
+                  <h4 class="text-xl/8 font-bold">100+ специалистов</h4>
+                  <p class="text-sm/5 font-light">
+                    Наша команда — эксперты с большим опытом и глубоким
+                    пониманием особенностей отрасли.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Reason 3 -->
+              <div class="space-y-2 lg:space-y-4">
+                <h3
+                  class="text-[64px]/10 lg:text-[90px]/22.5 font-medium text-brand-sky-100"
+                >
+                  400+
+                </h3>
+
+                <div class="space-y-2">
+                  <h4 class="text-xl/8 font-bold">400+ проектов</h4>
+                  <p class="text-sm/5 font-light">
+                    Реализуем проекты в Казахстане и странах СНГ — от разработки
+                    до ввода в эксплуатацию.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Reason 4 -->
+              <div class="space-y-4">
+                <img
+                  src="./assets/svgs/target.svg"
+                  alt="Target Image"
+                  class="-mt-4"
+                />
+
+                <div class="space-y-2">
+                  <h4 class="text-xl/8 font-bold">Мировые технологии</h4>
+                  <p class="text-sm/5 font-light">
+                    Применяем надежные решения и адаптируем их под местные
+                    условия.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Company Philosophy -->
+      <section id="company-philosophy" class="relative -mt-5">
+        <div class="container-base">
+          <div class="relative z-20 space-y-5">
+            <h2>Философия компании</h2>
+            <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
+          </div>
+
+          <div
+            class="flex flex-col lg:flex-row lg:items-end gap-4 sm:gap-14 lg:gap0 lg:-mt-20 xl:-mt-32 pt-12 lg:pt-0 lg:px-14"
+          >
+            <div class="flex-1 relative flex gap-5">
+              <img
+                src="./assets/svgs/quote.svg"
+                alt="Quote"
+                class="absolute -top-14 right-[10%] lg:static size-14 lg:size-27.5"
+              />
+
+              <div class="space-y-6 sm:space-y-8">
+                <p class="text-xl/6 sm:leading-10 xl:text-2xl font-light">
+                  Находить наилучшие технологические решения,
+                  формируя удовлетворенность Заказчика и сохраняя природные
+                  ресурсы и экологию
+                </p>
+                <p class="text-sm/5">
+                  Генеральный директор <br />
+                  ТОО Вотертех Шмараев Олег Юрьевич
+                </p>
+                <a
+                  :href="project.link"
+                  class="block text-lg font-bold text-brand-sky-300 hover:underline cursor-pointer smooth mt-5"
+                  >О компании ></a
+                >
+              </div>
+            </div>
+
+            <div class="sm:size-122 aspect-square relative">
+              <img
+                src="./assets/images/director.png"
+                alt="Director"
+                class="ml-auto"
+              />
+              <div
+                class="size-70 sm:size-100 shrink-0 absolute left-1/2 -translate-x-1/2 bottom-0 sm:right-0 -z-10 bg-brand-blue rounded-brand-2xl"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
