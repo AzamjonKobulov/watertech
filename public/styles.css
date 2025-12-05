@@ -1049,6 +1049,9 @@
   .pb-80 {
     padding-bottom: calc(var(--spacing) * 80);
   }
+  .pl-8 {
+    padding-left: calc(var(--spacing) * 8);
+  }
   .pl-10 {
     padding-left: calc(var(--spacing) * 10);
   }
