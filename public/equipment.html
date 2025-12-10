@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./styles.css" rel="stylesheet" />
-    <!-- Swiper CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
     <!-- Fancybox CSS -->
     <link
       rel="stylesheet"
@@ -458,353 +453,66 @@
       >
         <span>Главная</span>
         <span class="w-6 h-px bg-brand-gray-400 shrink-0"></span>
-        <span>Проекты</span>
-        <span class="w-6 h-px bg-brand-gray-400 shrink-0"></span>
-        <span class="uppercase">Канализационно-очистные сооружения Тюмень</span>
+        <span>Наше оборудование</span>
       </div>
 
       <!-- Project -->
-      <section id="project" class="pt-10 pb-16 lg:pb-32">
+      <section id="project" class="py-10">
         <div class="container-base">
           <div class="space-y-5">
-            <h2>Канализационно-очистные сооружения Тюмень</h2>
+            <h2>Наше оборудование</h2>
             <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
           </div>
 
-          <div
-            class="grid lg:grid-cols-2 gap-5 lg:gap-y-9 gap-x-5 mt-9 lg:mt-16"
+          <p class="text-xs/5 lg:text-sm/6 mt-6">
+            В своих проектах мы применяем установки и системы произведенные как
+            на собственных мощностях, так приобретенные у надежных партнёров.
+            Наши производственные площадки соответствуют требованиям стандартов
+            ISO 9001:2015, OHSAS 18001:2007 и расположены на территории
+            Казахстана, России, Италии, Финляндии и Китая.
+          </p>
+
+          <h3
+            class="text-xl/7.5 lg:text-2xl/10 text-brand-sky-300 font-bold mt-6 lg:mt-8"
           >
-            <div
-              class="lg:col-span-2 flex flex-col-reverse lg:flex-row items-stretch lg:gap-14 bg-white shadow-box rounded-3xl"
-            >
-              <div class="p-6 lg:p-10">
-                <ul class="text-sm/6 space-y-6">
-                  <li><span class="font-bold">Локация:</span> г. Тюмень</li>
-                  <li>
-                    <span class="font-bold">Заказчик: </span> РОСВОДОКАНАЛ
-                  </li>
-                  <li>
-                    <span class="font-bold">Цель:</span>
-                    <ul class="list-disc list-inside pl-3">
-                      <li>
-                        увеличение производительности КОС по входному потоку
-                        сточных вод с 220 до 260 тыс. м3/сут.;
-                      </li>
-                      <li>
-                        достижение требуемых показателей качества для сброса
-                        сточных вод в водоем.
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <span class="font-bold">Дата сдачи объекта: </span> не
-                    найдено
-                  </li>
-                </ul>
-              </div>
+            В случае заказа нашего оборудования, мы:
+          </h3>
 
-              <div class="lg:w-2/3 h-full rounded-3xl overflow-hidden">
-                <img
-                  src="./assets/images/project-1.png"
-                  alt="Project Image"
-                  class="size-full object-cover"
-                />
-              </div>
-            </div>
-            <div class="bg-white shadow-box rounded-3xl p-5 sm:p-8">
-              <h3
-                class="leading-7.5 text-2xl sm:leading-10 font-bold text-brand-sky-300"
-              >
-                Наша деятельность в рамках проекта:
-              </h3>
-
-              <ul
-                class="text-xs/5 sm:text-sm/10 sm:space-y-2 list-disc list-inside mt-5 pl-3"
-              >
-                <li>строительство</li>
-                <li>строительство дополнительных вторичных отстойников;</li>
-                <li>реконструкция существующих аэротенков;</li>
-                <li>
-                  реконструкция первичных отстойников и насосной станции осадка;
-                </li>
-                <li>строительство сооружений доочистки.</li>
-              </ul>
-            </div>
-            <div
-              class="flex flex-col justify-between bg-white shadow-box rounded-3xl p-6 sm:p-8"
-            >
-              <div class="space-y-5">
-                <div class="flex gap-4">
-                  <img
-                    src="./assets/svgs/result.svg"
-                    alt="Icon"
-                    class="size-10"
-                  />
-                  <div class="leading-7.5 sm:text-xl/10">
-                    <h4 class="font-bold text-brand-sky-300">Результат:</h4>
-                    <p class="mt-1">
-                      достигнута производительность КОС по входному потоку
-                      сточных вод 260 тыс. м3/сут.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <p class="mt-6 sm:mt-0 pb-10">
-                В рамках проекта было использовано произведенное нами
-                оборудование: аэротенки, отстойники, сооружения доочистки.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Images Slider -->
-        <div class="relative px-5">
-          <div
-            class="mt-15"
-            x-data="{
-            projectImagesSwiper: null,
-            isAtStart: true,
-            isAtEnd: false,
-            updateGradients() {
-              if (this.projectImagesSwiper) {
-                this.isAtStart = this.projectImagesSwiper.isBeginning;
-                this.isAtEnd = this.projectImagesSwiper.isEnd;
-              }
-            },
-            init() {
-              this.$nextTick(() => {
-                // Wait a bit more to ensure all elements are rendered
-                setTimeout(() => {
-                  if (typeof Swiper !== 'undefined') {
-                    // Use querySelector to find buttons by ID (more reliable than refs)
-                    // Try desktop buttons first, fallback to mobile
-                    const nextBtn = document.getElementById('project-images-next-desktop') 
-                      || document.getElementById('project-images-next-mobile')
-                      || this.$refs.projectImagesNext 
-                      || this.$refs.projectImagesNextMobile;
-                    const prevBtn = document.getElementById('project-images-prev-desktop')
-                      || document.getElementById('project-images-prev-mobile')
-                      || this.$refs.projectImagesPrev
-                      || this.$refs.projectImagesPrevMobile;
-                    
-                    if (!nextBtn || !prevBtn) {
-                      console.warn('Navigation buttons not found', { nextBtn, prevBtn });
-                      return;
-                    }
-                    
-                    this.projectImagesSwiper = new Swiper(this.$refs.projectImagesSwiper, {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
-                      breakpoints: {
-                        640: {
-                          slidesPerView: 1.5,
-                          spaceBetween: 20,
-                        },
-                        768: {
-                          slidesPerView: 1.5,
-                          spaceBetween: 30,
-                        },
-                        1024: {
-                          centeredSlides: true,
-                        },
-                      },
-                      navigation: {
-                        nextEl: nextBtn,
-                        prevEl: prevBtn,
-                      },
-                      on: {
-                        init: () => {
-                          this.updateGradients();
-                        },
-                        slideChange: () => {
-                          this.updateGradients();
-                        },
-                        reachBeginning: () => {
-                          this.isAtStart = true;
-                        },
-                        reachEnd: () => {
-                          this.isAtEnd = true;
-                        },
-                      },
-                    });
-                  }
-                }, 300);
-              });
-            }
-          }"
+          <ul
+            class="list-disc list-inside space-y-1 lg:space-y-4 text-xs/5 lg:text-sm/6 mt-4 lg:mt-6 pl-1 lg:pl-3"
           >
-            <div
-              class="swiper project-images-swiper relative overflow-visible!"
-              x-ref="projectImagesSwiper"
-            >
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div
-                    class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
-                  >
-                    <img
-                      src="./assets/images/project-detail-1.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div
-                    class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
-                  >
-                    <img
-                      src="./assets/images/project-detail-2.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div
-                    class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
-                  >
-                    <img
-                      src="./assets/images/project-detail-3.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div
-                    class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
-                  >
-                    <img
-                      src="./assets/images/project-detail-1.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div
-                    class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
-                  >
-                    <img
-                      src="./assets/images/project-detail-2.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div
-                    class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
-                  >
-                    <img
-                      src="./assets/images/project-detail-3.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <li>разрабатываем рабоче-конструкторскую документацию;</li>
+            <li>закупаем материалы и комплектующие у постоянных вендоров; </li>
+            <li>изготавливаем оборудование, контролируем производство;</li>
+            <li>организуем логистику поставок оборудования;</li>
+            <li>контролируем шеф-монтаж.</li>
+          </ul>
 
-            <!-- Custom Navigation Buttons Desktop -->
-            <div
-              class="hidden lg:block absolute top-0 left-0 w-screen h-full pointer-events-none z-20"
-            >
-              <div
-                class="absolute z-30 top-1/2 -translate-y-1/2 left-0 w-full flex-between"
-              >
-                <button
-                  type="button"
-                  id="project-images-prev-desktop"
-                  x-ref="projectImagesPrev"
-                  :disabled="isAtStart"
-                  class="absolute left-8 transition-opacity duration-200 pointer-events-auto"
-                  :class="{ 'opacity-0 pointer-events-none cursor-not-allowed': isAtStart, 'opacity-100': !isAtStart }"
-                >
-                  <img
-                    src="./assets/svgs/navigation-icon.svg"
-                    alt="Navigation Left"
-                    class="rotate-180"
-                  />
-                </button>
-                <button
-                  type="button"
-                  id="project-images-next-desktop"
-                  x-ref="projectImagesNext"
-                  :disabled="isAtEnd"
-                  class="absolute right-8 transition-opacity duration-200 pointer-events-auto"
-                  :class="{ 'opacity-0 pointer-events-none cursor-not-allowed': isAtEnd, 'opacity-100': !isAtEnd }"
-                >
-                  <img
-                    src="./assets/svgs/navigation-icon.svg"
-                    alt="Navigation Right"
-                  />
-                </button>
-              </div>
+          <h3
+            class="text-xl/7.5 lg:text-2xl/10 text-brand-sky-300 font-bold mt-6 lg:mt-8"
+          >
+            Если необходимо произвести закупку оборудования и материалов у наших
+            партнёров, мы:
+          </h3>
 
-              <!-- Left Gradient - Hidden when at start -->
-              <div
-                x-show="!isAtStart"
-                class="h-full w-50 xl:w-55 absolute top-0 left-0 z-10 bg-linear-to-r from-black/90 to-transparent"
-                style="display: none"
-              ></div>
-              <!-- Right Gradient - Hidden when at end -->
-              <div
-                x-show="!isAtEnd"
-                class="h-full w-50 xl:w-55 absolute top-0 right-0 z-10 bg-linear-to-l from-black/90 to-transparent"
-                style="display: none"
-              ></div>
-            </div>
+          <ul
+            class="list-disc list-inside space-y-1 lg:space-y-4 text-xs/5 lg:text-sm/6 mt-4 lg:mt-6 pl-1 lg:pl-3"
+          >
+            <li>подберем оборудование/материалы согласно документации;</li>
+            <li>разработаем опросные листы; </li>
+            <li>разместим заказ и организуем сопровождение закупки;</li>
+            <li>проконтролируем производство и приемку оборудования;</li>
+            <li>организуем шеф-монтаж.</li>
+          </ul>
 
-            <!-- Custom Navigation Buttons Mobile -->
-            <div
-              class="lg:hidden flex-center gap-4 mt-6 pointer-events-none z-10"
-            >
-              <button
-                id="project-images-prev-mobile"
-                x-ref="projectImagesPrevMobile"
-                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
-              >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="size-3.5 sm:size-auto"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M6.40976 11.1681C6.06654 10.8249 6.06654 10.2684 6.40976 9.92518L12.562 3.77293C12.9052 3.42971 13.4617 3.42971 13.805 3.77293C14.1482 4.11616 14.1482 4.67265 13.805 5.01588L8.27418 10.5467L13.805 16.0774C14.1482 16.4207 14.1482 16.9771 13.805 17.3204C13.4617 17.6636 12.9052 17.6636 12.562 17.3204L6.40976 11.1681Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-              <button
-                id="project-images-next-mobile"
-                x-ref="projectImagesNextMobile"
-                class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
-              >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="size-3.5 sm:size-auto"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M14.6837 9.92529C15.027 10.2685 15.027 10.825 14.6837 11.1682L8.53149 17.3205C8.18827 17.6637 7.63178 17.6637 7.28855 17.3205C6.94532 16.9773 6.94532 16.4208 7.28855 16.0775L12.8193 10.5468L7.28855 5.01599C6.94532 4.67276 6.94532 4.11628 7.28855 3.77305C7.63178 3.42982 8.18827 3.42982 8.53149 3.77305L14.6837 9.92529Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-            </div>
+          <div
+            class="h-60 sm:h-80 lg:h-120 rounded-brand-2xl overflow-hidden mt-10 lg:mt-20"
+          >
+            <img
+              src="./assets/images/pipe.png"
+              alt="Pipe"
+              class="size-full object-cover"
+            />
           </div>
         </div>
       </section>
@@ -841,64 +549,70 @@
                location: 'Локация',
                year: '2008 г.',
                link: '#'
-             }
+             },
+             {
+              id: 4,
+              image: './assets/images/project-1.png',
+              title: 'Название проекта',
+              location: 'Локация',
+              year: '2008 г.',
+              link: '#'
+            },
+            {
+              id: 5,
+              image: './assets/images/project-2.png',
+              title: 'Название проекта',
+              location: 'Локация',
+              year: '2008 г.',
+              link: '#'
+            },
+            {
+              id: 6,
+              image: './assets/images/project-3.png',
+              title: 'Название проекта',
+              location: 'Локация',
+              year: '2008 г.',
+              link: '#'
+            },
+            {
+              id: 7,
+              image: './assets/images/project-1.png',
+              title: 'Название проекта',
+              location: 'Локация',
+              year: '2008 г.',
+              link: '#'
+            },
+            {
+              id: 8,
+              image: './assets/images/project-2.png',
+              title: 'Название проекта',
+              location: 'Локация',
+              year: '2008 г.',
+              link: '#'
+            },
+            {
+              id: 9,
+              image: './assets/images/project-3.png',
+              title: 'Название проекта',
+              location: 'Локация',
+              year: '2008 г.',
+              link: '#'
+            },
            ],
-           projectsSwiper: null,
-           initProjectsSwiper() {
-             if (window.innerWidth >= 1024) {
-               if (this.projectsSwiper) {
-                 this.projectsSwiper.destroy(true, true);
-                 this.projectsSwiper = null;
-               }
-               return;
-             }
-             this.$nextTick(() => {
-               const swiperWrapper = this.$refs.projectsSwiper?.querySelector('.swiper-wrapper');
-               if (swiperWrapper && swiperWrapper.children.length > 0 && !this.projectsSwiper) {
-                 if (typeof Swiper !== 'undefined') {
-                   this.projectsSwiper = new Swiper(this.$refs.projectsSwiper, {
-                     slidesPerView: 1,
-                     spaceBetween: 24,
-                     breakpoints: {
-                       640: {
-                         slidesPerView: 2,
-                         spaceBetween: 24,
-                       },
-                     },
-                     navigation: {
-                       nextEl: '#projects-swiper-next',
-                       prevEl: '#projects-swiper-prev',
-                     },
-                   });
-                 }
-               }
-             });
-           },
            init() {
-             this.initProjectsSwiper();
-             let resizeTimer;
-             window.addEventListener('resize', () => {
-               clearTimeout(resizeTimer);
-               resizeTimer = setTimeout(() => {
-                 this.initProjectsSwiper();
-               }, 250);
-             });
            }
          }"
         >
           <div>
             <h2 class="max-w-6xl">
-              С 2007 года мы реализовали
-              <span class="text-brand-sky-300 font-bold"
-                >более 400 проектов.</span
-              >
-              Ниже Вы можете видеть некоторые из них
+              Ниже Вы можете ознакомиться с категориями оборудования, доступными
+              к заказу  для Вашего проекта.
             </h2>
             <span class="block w-45 h-0.75 bg-brand-sky-300 mt-5"></span>
           </div>
 
           <!-- Grid Layout for lg: and above -->
-          <div class="hidden lg:grid lg:grid-cols-3 gap-6 mt-20">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
             <template x-for="project in projects" :key="project.id">
               <div class="rounded-brand-2xl shadow-project">
                 <div class="h-55 sm:h-60 overflow-hidden rounded-t-brand-2xl">
@@ -910,13 +624,7 @@
                 </div>
                 <div class="p-4">
                   <h3 class="text-2xl font-bold" x-text="project.title"></h3>
-                  <div class="flex-between mt-3">
-                    <div class="flex items-center gap-3">
-                      <img src="./assets/svgs/location.svg" alt="Location" />
-                      <span class="text-xl" x-text="project.location"></span>
-                    </div>
-                    <p class="text-xl" x-text="project.year"></p>
-                  </div>
+                  <p class="text-sm mt-3">Область применения</p>
                   <a
                     :href="project.link"
                     class="block text-lg font-bold text-brand-sky-300 hover:underline smooth mt-5"
@@ -925,106 +633,6 @@
                 </div>
               </div>
             </template>
-          </div>
-
-          <!-- Swiper Slider for below lg: breakpoint -->
-          <div class="lg:hidden mt-8 sm:mt-20">
-            <div
-              class="swiper projects-swiper overflow-visible!"
-              x-ref="projectsSwiper"
-            >
-              <div class="swiper-wrapper">
-                <template x-for="project in projects" :key="project.id">
-                  <div class="swiper-slide">
-                    <div class="rounded-brand-2xl shadow-project">
-                      <div
-                        class="h-55 sm:h-60 overflow-hidden rounded-t-brand-2xl"
-                      >
-                        <img
-                          :src="project.image"
-                          :alt="project.title"
-                          class="size-full object-cover"
-                        />
-                      </div>
-                      <div class="p-4">
-                        <h3
-                          class="text-2xl font-bold"
-                          x-text="project.title"
-                        ></h3>
-                        <div class="flex-between mt-3">
-                          <div class="flex items-center gap-3">
-                            <img
-                              src="./assets/svgs/location.svg"
-                              alt="Location"
-                            />
-                            <span
-                              class="text-xl"
-                              x-text="project.location"
-                            ></span>
-                          </div>
-                          <p class="text-xl" x-text="project.year"></p>
-                        </div>
-                        <a
-                          :href="project.link"
-                          class="block text-lg font-bold text-brand-sky-300 hover:underline smooth mt-5"
-                          >Подробнее ></a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </template>
-              </div>
-            </div>
-
-            <!-- Swiper Custom Navigation Buttons -->
-            <div class="flex-center gap-4 mt-7">
-              <button
-                id="projects-swiper-prev"
-                class="size-7.5 shrink-0 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M3.9773 6.92966C3.76433 6.71669 3.76433 6.3714 3.9773 6.15843L7.79466 2.34107C8.00762 2.12811 8.35291 2.12811 8.56588 2.34107C8.77885 2.55404 8.77885 2.89933 8.56588 3.1123L5.13413 6.54404L8.56588 9.97579C8.77885 10.1888 8.77885 10.534 8.56588 10.747C8.35291 10.96 8.00763 10.96 7.79466 10.747L3.9773 6.92966Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-              <button
-                id="projects-swiper-next"
-                class="size-7.5 shrink-0 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M9.11078 6.15848C9.32375 6.37145 9.32375 6.71673 9.11078 6.9297L5.29342 10.7471C5.08046 10.96 4.73517 10.96 4.5222 10.7471C4.30923 10.5341 4.30923 10.1888 4.5222 9.97584L7.95395 6.54409L4.5222 3.11234C4.30923 2.89938 4.30923 2.55409 4.5222 2.34112C4.73517 2.12815 5.08046 2.12815 5.29342 2.34112L9.11078 6.15848Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="flex-center">
-            <button
-              class="h-11 sm:h-16 text-xs/4 sm:text-base/5 font-bold text-brand-sky-300 border border-brand-sky-300 rounded-lg sm:rounded-xl hover:bg-brand-sky-300 hover:text-white smooth mt-5 sm:mt-11 px-8 sm:px-10"
-            >
-              Смотреть все проекты
-            </button>
           </div>
         </div>
       </section>
@@ -1434,8 +1042,6 @@
       </div>
     </footer>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Fancybox JS -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="./js/script.js"></script>
