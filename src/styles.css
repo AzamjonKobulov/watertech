@@ -18,8 +18,8 @@
   --color-brand-red: #ff4646;
   --color-brand-gray: #ababab;
   --color-brand-gray-200: #d9d9d9;
-
   --color-brand-gray-300: #c1c1c1;
+  --color-brand-gray-400: #919191;
   --color-brand-body: #4a5565;
 
   --background-image-hero: url("./assets/images/bg-hero.png");
@@ -35,12 +35,16 @@
     #e6f3f9 0%,
     rgba(255, 255, 255, 0) 50%
   );
-  --background-image-areas-of-activity-2: linear-gradient(
+  --background-image-gradient-block: linear-gradient(
     180deg,
     #ffffff 0%,
     rgba(255, 255, 255, 0) 100%
   );
-
+  --background-image-navigation: linear-gradient(
+    180deg,
+    #000000 0%,
+    rgba(102, 102, 102, 0) 100%
+  );
   --radius-brand-lg: 0.625rem;
   --radius-brand-2xl: 1.25rem;
 
