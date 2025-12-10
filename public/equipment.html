@@ -572,76 +572,64 @@
                 this.isAtEnd = this.projectImagesSwiper.isEnd;
               }
             },
-            initSwiper() {
-              if (typeof Swiper !== 'undefined' && this.$refs.projectImagesSwiper) {
-                // Destroy existing swiper if it exists
-                if (this.projectImagesSwiper) {
-                  this.projectImagesSwiper.destroy(true, true);
-                  this.projectImagesSwiper = null;
-                }
-                
-                // Get the appropriate buttons based on screen size
-                const isDesktop = window.innerWidth >= 1024;
-                const nextBtn = isDesktop 
-                  ? this.$refs.projectImagesNextDesktop 
-                  : this.$refs.projectImagesNextMobile;
-                const prevBtn = isDesktop
-                  ? this.$refs.projectImagesPrevDesktop
-                  : this.$refs.projectImagesPrevMobile;
-                
-                if (nextBtn && prevBtn) {
-                  this.projectImagesSwiper = new Swiper(this.$refs.projectImagesSwiper, {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                    breakpoints: {
-                      640: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 20,
-                      },
-                      768: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 30,
-                      },
-                      1024: {
-                        centeredSlides: true,
-                      },
-                    },
-                    navigation: {
-                      nextEl: nextBtn,
-                      prevEl: prevBtn,
-                    },
-                    on: {
-                      init: () => {
-                        this.updateGradients();
-                      },
-                      slideChange: () => {
-                        this.updateGradients();
-                      },
-                      reachBeginning: () => {
-                        this.isAtStart = true;
-                      },
-                      reachEnd: () => {
-                        this.isAtEnd = true;
-                      },
-                    },
-                  });
-                }
-              }
-            },
             init() {
               this.$nextTick(() => {
+                // Wait a bit more to ensure all elements are rendered
                 setTimeout(() => {
-                  this.initSwiper();
-                }, 100);
-              });
-              
-              // Reinitialize on resize to switch between desktop/mobile buttons
-              let resizeTimer;
-              window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                  this.initSwiper();
-                }, 250);
+                  if (typeof Swiper !== 'undefined') {
+                    // Use querySelector to find buttons by ID (more reliable than refs)
+                    // Try desktop buttons first, fallback to mobile
+                    const nextBtn = document.getElementById('project-images-next-desktop') 
+                      || document.getElementById('project-images-next-mobile')
+                      || this.$refs.projectImagesNext 
+                      || this.$refs.projectImagesNextMobile;
+                    const prevBtn = document.getElementById('project-images-prev-desktop')
+                      || document.getElementById('project-images-prev-mobile')
+                      || this.$refs.projectImagesPrev
+                      || this.$refs.projectImagesPrevMobile;
+                    
+                    if (!nextBtn || !prevBtn) {
+                      console.warn('Navigation buttons not found', { nextBtn, prevBtn });
+                      return;
+                    }
+                    
+                    this.projectImagesSwiper = new Swiper(this.$refs.projectImagesSwiper, {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                      breakpoints: {
+                        640: {
+                          slidesPerView: 1.5,
+                          spaceBetween: 20,
+                        },
+                        768: {
+                          slidesPerView: 1.5,
+                          spaceBetween: 30,
+                        },
+                        1024: {
+                          centeredSlides: true,
+                        },
+                      },
+                      navigation: {
+                        nextEl: nextBtn,
+                        prevEl: prevBtn,
+                      },
+                      on: {
+                        init: () => {
+                          this.updateGradients();
+                        },
+                        slideChange: () => {
+                          this.updateGradients();
+                        },
+                        reachBeginning: () => {
+                          this.isAtStart = true;
+                        },
+                        reachEnd: () => {
+                          this.isAtEnd = true;
+                        },
+                      },
+                    });
+                  }
+                }, 300);
               });
             }
           }"
@@ -729,12 +717,11 @@
               >
                 <button
                   type="button"
-                  x-ref="projectImagesPrevDesktop"
-                  x-show="!isAtStart"
+                  id="project-images-prev-desktop"
+                  x-ref="projectImagesPrev"
                   :disabled="isAtStart"
-                  class="absolute left-8 pointer-events-auto transition-opacity duration-200"
-                  :class="{ 'opacity-0 pointer-events-none': isAtStart }"
-                  style="display: none"
+                  class="absolute left-8 transition-opacity duration-200 pointer-events-auto"
+                  :class="{ 'opacity-0 pointer-events-none cursor-not-allowed': isAtStart, 'opacity-100': !isAtStart }"
                 >
                   <img
                     src="./assets/svgs/navigation-icon.svg"
@@ -744,12 +731,11 @@
                 </button>
                 <button
                   type="button"
-                  x-ref="projectImagesNextDesktop"
-                  x-show="!isAtEnd"
+                  id="project-images-next-desktop"
+                  x-ref="projectImagesNext"
                   :disabled="isAtEnd"
-                  class="absolute right-8 pointer-events-auto transition-opacity duration-200"
-                  :class="{ 'opacity-0 pointer-events-none': isAtEnd }"
-                  style="display: none"
+                  class="absolute right-8 transition-opacity duration-200 pointer-events-auto"
+                  :class="{ 'opacity-0 pointer-events-none cursor-not-allowed': isAtEnd, 'opacity-100': !isAtEnd }"
                 >
                   <img
                     src="./assets/svgs/navigation-icon.svg"
@@ -761,13 +747,13 @@
               <!-- Left Gradient - Hidden when at start -->
               <div
                 x-show="!isAtStart"
-                class="h-full w-55 absolute top-0 left-0 z-10 bg-linear-to-r from-black/90 to-transparent"
+                class="h-full w-50 xl:w-55 absolute top-0 left-0 z-10 bg-linear-to-r from-black/90 to-transparent"
                 style="display: none"
               ></div>
               <!-- Right Gradient - Hidden when at end -->
               <div
                 x-show="!isAtEnd"
-                class="h-full w-55 absolute top-0 right-0 z-10 bg-linear-to-l from-black/90 to-transparent"
+                class="h-full w-50 xl:w-55 absolute top-0 right-0 z-10 bg-linear-to-l from-black/90 to-transparent"
                 style="display: none"
               ></div>
             </div>
@@ -777,6 +763,7 @@
               class="lg:hidden flex-center gap-4 mt-6 pointer-events-none z-10"
             >
               <button
+                id="project-images-prev-mobile"
                 x-ref="projectImagesPrevMobile"
                 class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
               >
@@ -797,6 +784,7 @@
                 </svg>
               </button>
               <button
+                id="project-images-next-mobile"
                 x-ref="projectImagesNextMobile"
                 class="size-7.5 sm:size-12 flex-center bg-brand-blue-100 rounded-full disabled:bg-brand-gray-200 pointer-events-auto transition-opacity duration-200 hover:opacity-80"
               >
