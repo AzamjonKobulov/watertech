@@ -114,3 +114,11 @@
     animation: expandFromCenter 0.3s ease-out forwards;
   }
 }
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
