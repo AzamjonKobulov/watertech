@@ -469,7 +469,8 @@
             <span class="block w-45 h-0.75 bg-brand-sky-300"></span>
           </div>
 
-          <ul class="max-w-295.5 text-sm/7.5 font-light space-y-10 mt-10">
+          <div class="content font-light max-w-295.5 mt-10">
+            <ul class="space-y-10">
             <li>
               При управлении проектами мы опираемся на современные и доказавшие
               свою эффективность подходы. Для реализации масштабных
@@ -489,19 +490,20 @@
               требованиям и достигать поставленных целей.
             </li>
             <li>
-              <a href="https://www.pmi.org/" class="text-brand-sky-200"
+              <a href="https://www.pmi.org/"
                 >PMBOK</a
               >
               и
 
-              <a href="https://agilealliance.org/" class="text-brand-sky-200"
+              <a href="https://agilealliance.org/"
                 >Agile</a
               >
               признаны в международном инжиниринге как надёжные инструменты
               достижения высоких результатов в условиях сложных технических
               задач и сжатых сроков.
             </li>
-          </ul>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -607,13 +609,15 @@
             </div>
           </div>
 
-          <p class="font-light leading-5 sm:text-sm/7.5 mt-8">
-            Проектное управление — это не просто контроль сроков и задач, а
-            комплексная поддержка на всём жизненном цикле. Мы помогаем
-            превратить идеи в чётко поставленные задачи с измеримым результатом.
-            Если вы планируете запуск или развитие проекта, мы готовы
-            подключиться.
-          </p>
+          <div class="content font-light mt-8">
+            <p>
+              Проектное управление — это не просто контроль сроков и задач, а
+              комплексная поддержка на всём жизненном цикле. Мы помогаем
+              превратить идеи в чётко поставленные задачи с измеримым результатом.
+              Если вы планируете запуск или развитие проекта, мы готовы
+              подключиться.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -650,7 +654,7 @@
               />
               <!-- Error Message -->
               <span
-                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                class="whitespace-nowrap text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
                 >Имя не может быть короче 3х символов</span
               >
             </label>
@@ -659,20 +663,20 @@
             <div
               class="relative space-y-2.5"
               x-data="{
-                open: false,
-                selected: 'Звонок, telegram, Whats App',
-                options: [
-                  'Звонок, telegram, Whats App',
-                  'Звонок',
-                  'Telegram',
-                  'WhatsApp',
-                  'Email'
-                ],
-                selectOption(option) {
-                  this.selected = option;
-                  this.open = false;
-                }
-              }"
+               open: false,
+               selected: 'Звонок, telegram, Whats App',
+               options: [
+                 'Звонок, telegram, Whats App',
+                 'Звонок',
+                 'Telegram',
+                 'WhatsApp',
+                 'Email'
+               ],
+               selectOption(option) {
+                 this.selected = option;
+                 this.open = false;
+               }
+             }"
               @click.away="open = false"
             >
               <span class="block text-left font-medium text-white"
@@ -684,9 +688,9 @@
                   @click="open = !open"
                   class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
                   :class="{
-                    'text-brand-body': selected !== 'Звонок, telegram, Whats App',
-                    'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
-                  }"
+                   'text-brand-body': selected !== 'Звонок, telegram, Whats App',
+                   'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
+                 }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -750,19 +754,19 @@
             <div
               class="relative space-y-2.5"
               x-data="{
-                open: false,
-                selected: 'Как можно скорее',
-                options: [
-                  'Утром',
-                  'Днем',
-                  'Вечером',
-                  'Ночью'
-                ],
-                selectOption(option) {
-                  this.selected = option;
-                  this.open = false;
-                }
-              }"
+               open: false,
+               selected: 'Как можно скорее',
+               options: [
+                 'Утром',
+                 'Днем',
+                 'Вечером',
+                 'Ночью'
+               ],
+               selectOption(option) {
+                 this.selected = option;
+                 this.open = false;
+               }
+             }"
               @click.away="open = false"
             >
               <span class="block text-left font-medium text-white"
@@ -774,9 +778,9 @@
                   @click="open = !open"
                   class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
                   :class="{
-                    'text-brand-body': selected !== 'Как можно скорее',
-                    'text-brand-gray-300': selected === 'Как можно скорее'
-                  }"
+                   'text-brand-body': selected !== 'Как можно скорее',
+                   'text-brand-gray-300': selected === 'Как можно скорее'
+                 }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -836,7 +840,7 @@
             </label>
 
             <label
-              class="lg:col-span-3 flex gap-2.5 text-white cursor-pointer sm:-mt-10"
+              class="sm:col-span-2 lg:col-span-3 flex gap-2.5 text-white cursor-pointer lg:-mt-10"
             >
               <div
                 class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
@@ -864,7 +868,7 @@
               >
             </label>
 
-            <div class="lg:col-span-3 flex-center mt-6 sm:mt-0">
+            <div class="sm:col-span-2 lg:col-span-3 flex-center mt-6 sm:mt-0">
               <button
                 class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
               >

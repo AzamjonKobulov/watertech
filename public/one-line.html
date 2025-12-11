@@ -479,15 +479,13 @@
               />
             </div>
 
-            <div class="space-y-4 md:pr-14">
+            <div class="content space-y-4 md:pr-14">
               <div class="space-y-3">
-                <h3 class="text-xl/7.5 font-bold text-brand-sky-300">
-                  Сфера использования: 
+                <h3 class="text-brand-sky-300">
+                  Сфера использования: 
                 </h3>
 
-                <ul
-                  class="list-disc list-inside font-light text-xs/5 lg:text-sm/5.5 mt-4 lg:mt-6 pl-1 lg:pl-3"
-                >
+                <ul class="font-light mt-4 lg:mt-6">
                   <li>деминерализация воды с высоким содержанием солей;</li>
                   <li>
                     обессоливание органических растворов в пищевой
@@ -501,13 +499,11 @@
                 </ul>
               </div>
               <div class="space-y-3">
-                <h3 class="text-xl/7.5 font-bold text-brand-sky-300">
-                  Преимущества: 
+                <h3 class="text-brand-sky-300">
+                  Преимущества: 
                 </h3>
 
-                <ul
-                  class="list-disc list-inside font-light text-xs/5 lg:text-sm/5.5 mt-4 lg:mt-6 pl-1 lg:pl-3"
-                >
+                <ul class="font-light mt-4 lg:mt-6">
                   <li>
                     работа с высококонцентрированными солевыми растворами;
                   </li>
@@ -520,13 +516,11 @@
                 </ul>
               </div>
               <div class="space-y-3">
-                <h3 class="text-xl/7.5 font-bold text-brand-sky-300">
+                <h3 class="text-brand-sky-300">
                   Эффективность работы:
                 </h3>
 
-                <ul
-                  class="font-light text-xs/5 lg:text-sm/5.5 mt-4 lg:mt-6 pl-1 lg:pl-3"
-                >
+                <ul class="font-light mt-4 lg:mt-6">
                   <li>высокая</li>
                 </ul>
               </div>
@@ -715,11 +709,11 @@
                 id="name"
                 name="name"
                 placeholder="Имя"
-                class="h-8 sm:h-12 lg:h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                class="h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
               />
               <!-- Error Message -->
               <span
-                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                class="whitespace-nowrap text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
                 >Имя не может быть короче 3х символов</span
               >
             </label>
@@ -728,20 +722,20 @@
             <div
               class="relative space-y-2.5"
               x-data="{
-                open: false,
-                selected: 'Звонок, telegram, Whats App',
-                options: [
-                  'Звонок, telegram, Whats App',
-                  'Звонок',
-                  'Telegram',
-                  'WhatsApp',
-                  'Email'
-                ],
-                selectOption(option) {
-                  this.selected = option;
-                  this.open = false;
-                }
-              }"
+               open: false,
+               selected: 'Звонок, telegram, Whats App',
+               options: [
+                 'Звонок, telegram, Whats App',
+                 'Звонок',
+                 'Telegram',
+                 'WhatsApp',
+                 'Email'
+               ],
+               selectOption(option) {
+                 this.selected = option;
+                 this.open = false;
+               }
+             }"
               @click.away="open = false"
             >
               <span class="block text-left font-medium text-white"
@@ -751,11 +745,11 @@
                 <button
                   type="button"
                   @click="open = !open"
-                  class="h-8 sm:h-12 lg:h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
                   :class="{
-                    'text-brand-body': selected !== 'Звонок, telegram, Whats App',
-                    'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
-                  }"
+                   'text-brand-body': selected !== 'Звонок, telegram, Whats App',
+                   'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
+                 }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -819,19 +813,19 @@
             <div
               class="relative space-y-2.5"
               x-data="{
-                open: false,
-                selected: 'Как можно скорее',
-                options: [
-                  'Утром',
-                  'Днем',
-                  'Вечером',
-                  'Ночью'
-                ],
-                selectOption(option) {
-                  this.selected = option;
-                  this.open = false;
-                }
-              }"
+               open: false,
+               selected: 'Как можно скорее',
+               options: [
+                 'Утром',
+                 'Днем',
+                 'Вечером',
+                 'Ночью'
+               ],
+               selectOption(option) {
+                 this.selected = option;
+                 this.open = false;
+               }
+             }"
               @click.away="open = false"
             >
               <span class="block text-left font-medium text-white"
@@ -841,11 +835,11 @@
                 <button
                   type="button"
                   @click="open = !open"
-                  class="h-8 sm:h-12 lg:h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
                   :class="{
-                    'text-brand-body': selected !== 'Как можно скорее',
-                    'text-brand-gray-300': selected === 'Как можно скорее'
-                  }"
+                   'text-brand-body': selected !== 'Как можно скорее',
+                   'text-brand-gray-300': selected === 'Как можно скорее'
+                 }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -900,12 +894,12 @@
                 id="message"
                 name="message"
                 placeholder="Текст сообщения"
-                class="h-28 lg:h-8 sm:h-12 lg:h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 resize-none py-5 px-7"
+                class="h-28 lg:h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 resize-none py-5 px-7"
               ></textarea>
             </label>
 
             <label
-              class="lg:col-span-3 flex gap-2.5 text-white cursor-pointer sm:-mt-10"
+              class="sm:col-span-2 lg:col-span-3 flex gap-2.5 text-white cursor-pointer lg:-mt-10"
             >
               <div
                 class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
@@ -933,7 +927,7 @@
               >
             </label>
 
-            <div class="lg:col-span-3 flex-center mt-6 sm:mt-0">
+            <div class="sm:col-span-2 lg:col-span-3 flex-center mt-6 sm:mt-0">
               <button
                 class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
               >

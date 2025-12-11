@@ -474,13 +474,11 @@
             <p>1.10.2025</p>
           </div>
 
-          <div class="space-y-8 mt-7">
+          <div class="content space-y-8 mt-7">
             <div class="space-y-5">
-              <h3 class="leading-5 sm:text-xl/10 font-bold">
-                Почему вода — ключевой ресурс для ТЭЦ и АЭС
-              </h3>
+              <h3>Почему вода — ключевой ресурс для ТЭЦ и АЭС</h3>
 
-              <div class="space-y-4 text-xs/5 sm:text-sm/5.5">
+              <div class="space-y-4">
                 <p>
                   Вода — не просто жидкость, а стратегический ресурс в
                   энергетике. В системах, где используется тепловой принцип
@@ -501,11 +499,9 @@
               </div>
             </div>
             <div class="space-y-5">
-              <h3 class="leading-5 sm:text-xl/10 font-bold">
-                Зачем нужна водоподготовка
-              </h3>
+              <h3>Зачем нужна водоподготовка</h3>
 
-              <div class="space-y-4 text-xs/5 sm:text-sm/5.5">
+              <div class="space-y-4">
                 <p>
                   Несмотря на свою химическую простоту, в реальных условиях вода
                   содержит растворимые соли, нерастворимые включения,
@@ -518,7 +514,7 @@
                   технологических параметров, чтобы защитить следующие элементы:
                 </p>
 
-                <ul class="list-disc list-inside pl-1 lg:pl-3">
+                <ul>
                   <li>трубопроводы высокого давления,</li>
                   <li>турбинные лопатки,</li>
                   <li>теплообменники и змеевики,</li>
@@ -537,15 +533,13 @@
             </div>
 
             <div class="space-y-5">
-              <p class="text-xs/5 sm:text-sm/5.5">
+              <p>
                 Очистка выполняется по двум основным направлениям:
                 <span class="font-bold">механическому и химическому.</span>
               </p>
-              <h3 class="leading-5 sm:text-xl/10 font-bold">
-                Механическая очистка: борьба с песком и илом
-              </h3>
+              <h3>Механическая очистка: борьба с песком и илом</h3>
 
-              <ul class="space-y-3 sm:space-y-0 text-xs/5 sm:text-sm/5.5">
+              <ul class="space-y-3 sm:space-y-0">
                 <li class="flex items-center gap-4">
                   <span class="w-7 text-xl/8 font-bold text-brand-sky-300"
                     >01
@@ -577,29 +571,25 @@
             </div>
 
             <div class="space-y-5">
-              <p class="text-xs/5 sm:text-sm/5.5">
+              <p>
                 Каждый тип фильтрации выбирается с учетом конкретных условий
                 эксплуатации.
               </p>
-              <h3 class="leading-5 sm:text-xl/10 font-bold">
-                Химическая очистка: удаление растворённых угроз
-              </h3>
+              <h3>Химическая очистка: удаление растворённых угроз</h3>
 
-              <p class="text-xs/5 sm:text-sm/5.5">
+              <p>
                 Химическая подготовка воды предполагает использование различных
                 технологий:
               </p>
 
-              <ul
-                class="text-xs/5 sm:text-sm/5.5 list-disc list-inside pl-1 lg:pl-3"
-              >
+              <ul>
                 <li>ионообменная фильтрация,</li>
                 <li>сорбция на активированных материалах,</li>
                 <li>осмотические установки,</li>
                 <li>системы умягчения и деминерализации.</li>
               </ul>
 
-              <p class="text-xs/5 sm:text-sm/5.5">
+              <p>
                 Особое внимание уделяется удалению солей кальция, железа и
                 магния, которые вызывают образование накипи и коррозию. Контроль
                 уровня pH — обязательное условие: в идеале он должен стремиться
@@ -615,9 +605,7 @@
             </div>
 
             <div class="space-y-4">
-              <h3 class="leading-5 sm:text-xl/10 font-bold text-brand-sky-300">
-                Заключение
-              </h3>
+              <h3 class="text-brand-sky-300">Заключение</h3>
 
               <p class="text-xs sm:text-base leading-5.5">
                 <span class="font-bold">Эффективная водоподготовка</span> — это
@@ -867,7 +855,7 @@
               />
               <!-- Error Message -->
               <span
-                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                class="whitespace-nowrap text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
                 >Имя не может быть короче 3х символов</span
               >
             </label>
@@ -876,20 +864,20 @@
             <div
               class="relative space-y-2.5"
               x-data="{
-                open: false,
-                selected: 'Звонок, telegram, Whats App',
-                options: [
-                  'Звонок, telegram, Whats App',
-                  'Звонок',
-                  'Telegram',
-                  'WhatsApp',
-                  'Email'
-                ],
-                selectOption(option) {
-                  this.selected = option;
-                  this.open = false;
-                }
-              }"
+             open: false,
+             selected: 'Звонок, telegram, Whats App',
+             options: [
+               'Звонок, telegram, Whats App',
+               'Звонок',
+               'Telegram',
+               'WhatsApp',
+               'Email'
+             ],
+             selectOption(option) {
+               this.selected = option;
+               this.open = false;
+             }
+           }"
               @click.away="open = false"
             >
               <span class="block text-left font-medium text-white"
@@ -901,9 +889,9 @@
                   @click="open = !open"
                   class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
                   :class="{
-                    'text-brand-body': selected !== 'Звонок, telegram, Whats App',
-                    'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
-                  }"
+                 'text-brand-body': selected !== 'Звонок, telegram, Whats App',
+                 'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
+               }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -967,19 +955,19 @@
             <div
               class="relative space-y-2.5"
               x-data="{
-                open: false,
-                selected: 'Как можно скорее',
-                options: [
-                  'Утром',
-                  'Днем',
-                  'Вечером',
-                  'Ночью'
-                ],
-                selectOption(option) {
-                  this.selected = option;
-                  this.open = false;
-                }
-              }"
+             open: false,
+             selected: 'Как можно скорее',
+             options: [
+               'Утром',
+               'Днем',
+               'Вечером',
+               'Ночью'
+             ],
+             selectOption(option) {
+               this.selected = option;
+               this.open = false;
+             }
+           }"
               @click.away="open = false"
             >
               <span class="block text-left font-medium text-white"
@@ -991,9 +979,9 @@
                   @click="open = !open"
                   class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
                   :class="{
-                    'text-brand-body': selected !== 'Как можно скорее',
-                    'text-brand-gray-300': selected === 'Как можно скорее'
-                  }"
+                 'text-brand-body': selected !== 'Как можно скорее',
+                 'text-brand-gray-300': selected === 'Как можно скорее'
+               }"
                 >
                   <span x-text="selected"></span>
                   <svg
@@ -1053,7 +1041,7 @@
             </label>
 
             <label
-              class="lg:col-span-3 flex gap-2.5 text-white cursor-pointer sm:-mt-10"
+              class="sm:col-span-2 lg:col-span-3 flex gap-2.5 text-white cursor-pointer lg:-mt-10"
             >
               <div
                 class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
@@ -1081,7 +1069,7 @@
               >
             </label>
 
-            <div class="lg:col-span-3 flex-center mt-6 sm:mt-0">
+            <div class="sm:col-span-2 lg:col-span-3 flex-center mt-6 sm:mt-0">
               <button
                 class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
               >

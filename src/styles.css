@@ -113,6 +113,87 @@
     background-color: var(--color-brand-sky-200);
     animation: expandFromCenter 0.3s ease-out forwards;
   }
+
+  /* Content block styles for admin-editable content */
+  .content {
+    @apply space-y-4;
+  }
+
+  .content p {
+    @apply text-xs/5 sm:text-sm/5.5;
+  }
+
+  .content.font-light p {
+    @apply text-xs/5 sm:text-sm/7.5 font-light;
+  }
+
+  .content.font-light ul {
+    @apply text-xs/5 lg:text-sm/7.5;
+  }
+
+  .content p.text-xs.sm\:text-base {
+    @apply text-xs sm:text-base leading-5.5;
+  }
+
+  .content p.font-bold {
+    @apply font-bold;
+  }
+
+  .content h2 {
+    @apply font-light text-2xl lg:text-[2.5rem];
+  }
+
+  .content h3 {
+    @apply leading-5 sm:text-xl/10 font-bold;
+  }
+
+  .content h3.text-brand-sky-300 {
+    @apply text-brand-sky-300;
+  }
+
+  .content h4 {
+    @apply text-xl/8 font-bold;
+  }
+
+  .content h5,
+  .content h6 {
+    @apply text-lg font-bold;
+  }
+
+  .content ul {
+    @apply list-disc list-inside pl-1 lg:pl-3 text-xs/5 sm:text-sm/5.5;
+  }
+
+  .content ol {
+    @apply list-decimal list-inside pl-1 lg:pl-3 text-xs/5 sm:text-sm/5.5;
+  }
+
+  .content li {
+    @apply text-xs/5 sm:text-sm/5.5;
+  }
+
+  .content a {
+    @apply text-brand-sky-300 hover:underline smooth;
+  }
+
+  .content strong,
+  .content b {
+    @apply font-bold;
+  }
+
+  .content em {
+    @apply italic;
+  }
+
+  .content span.font-bold {
+    @apply font-bold;
+  }
+
+  /* Special cases for numbered lists with flex layout */
+  .content ul.space-y-3 li,
+  .content ul.space-y-0 li {
+    @apply flex items-center gap-4 sm:gap-5;
+  }
 }
 
 .scrollbar-hidden {
