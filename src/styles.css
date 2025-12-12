@@ -25,6 +25,11 @@
   --background-image-hero: url("./assets/images/bg-hero.png");
   --background-image-water: url("./assets/images/water-2.png");
 
+  --background-image-hero: linear-gradient(
+    0deg,
+    #e6f3f9 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
   --background-image-btn: radial-gradient(
     50% 50% at 50% 50%,
     #32befb 0%,
