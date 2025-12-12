@@ -454,7 +454,7 @@
     <main>
       <!-- Path -->
       <div
-        class="container-base flex items-center gap-4 font-light text-xs whitespace-nowrap flex-wrap mt-7"
+        class="container-base flex items-center gap-4 font-light text-xs whitespace-nowrap flex-wrap lg:mt-7"
       >
         <span>Главная</span>
         <span class="w-6 h-px bg-brand-gray-400 shrink-0"></span>
@@ -688,20 +688,23 @@
               <div class="swiper-wrapper">
                 <template x-for="license in licenses" :key="license.id">
                   <div class="swiper-slide">
-                    <div class="relative flex-center p-4 md:p-6">
+                    <div class="framed-content flex-center p-4 md:p-6">
+                      <!-- White background container - stays inside frame -->
+                      <div class="framed-content-bg"></div>
                       <!-- Brand -->
                       <a
                         :href="license.license"
                         :data-fancybox="'licenses'"
                         :data-caption="license.alt"
-                        class="cursor-pointer"
+                        class="framed-content-inner cursor-pointer"
                       >
                         <img :src="license.license" :alt="license.alt" />
                       </a>
+                      <!-- Frame overlay - top layer -->
                       <img
                         src="./assets/images/frame.png"
                         alt="Frame"
-                        class="absolute size-full pointer-events-none"
+                        class="framed-content-overlay"
                       />
                     </div>
                   </div>

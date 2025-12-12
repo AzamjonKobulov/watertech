@@ -267,3 +267,28 @@
     display: none;
   }
 }
+
+/* Framed content structure - prevents gaps and blinking */
+.framed-content {
+  @apply relative;
+}
+
+.framed-content-bg {
+  @apply absolute inset-0 bg-white;
+  margin: 2px;
+}
+
+.framed-content-inner {
+  @apply relative z-10 flex-center;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+}
+
+.framed-content-inner img {
+  @apply max-w-full max-h-full object-contain;
+}
+
+.framed-content-overlay {
+  @apply absolute inset-0 size-full pointer-events-none z-20;
+  object-fit: fill;
+}
