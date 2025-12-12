@@ -515,10 +515,10 @@
                 >
                 С 2007 года нами выполнено более 400 проектов в сфере
                 водоподготовки и очистки промышленных, химически загрязненных и
-                хозяйственно-бытовых стоков. В нашей команде более 100 профильных
-                высококвалифицированных специалистов. Мы берёмся за проекты любой
-                сложности и реализуем их на высоком техническом и организационном
-                уровне.
+                хозяйственно-бытовых стоков. В нашей команде более 100
+                профильных высококвалифицированных специалистов. Мы берёмся за
+                проекты любой сложности и реализуем их на высоком техническом и
+                организационном уровне.
               </p>
             </div>
           </div>
@@ -577,21 +577,24 @@
               <div class="content">
                 <ul>
                   <li>
-                    проводим предпроектный аудит проблем и потребностей Заказчика;
+                    проводим предпроектный аудит проблем и потребностей
+                    Заказчика;
                   </li>
                   <li>
                     разрабатываем технико-экономическое обоснование проекта;
                   </li>
                   <li>разрабатываем проектную документацию;</li>
-                <li>
-                  производим оборудование / сопровождаем закупку у партнеров,
-                  обеспечиваем логистику с последующей установкой оборудования;
-                </li>
-                <li>
-                  проводим пусконаладочные работы, обучаем персонал,
-                  осуществляем сервисное обслуживание.
-                </li>
-              </ul>
+                  <li>
+                    производим оборудование / сопровождаем закупку у партнеров,
+                    обеспечиваем логистику с последующей установкой
+                    оборудования;
+                  </li>
+                  <li>
+                    проводим пусконаладочные работы, обучаем персонал,
+                    осуществляем сервисное обслуживание.
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -949,31 +952,31 @@
             Обсудим детали проекта и предложим оптимальный вариант реализации
           </h2>
 
-         <!-- Form -->
-         <div
-         class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-5 sm:gap-y-7 lg:gap-y-14 mt-10 2xl:mt-20"
-       >
-         <!-- Name -->
-         <label for="name" class="space-y-2.5 relative">
-           <span class="block font-medium text-white">Ваше имя?*</span>
-           <input
-             type="text"
-             id="name"
-             name="name"
-             placeholder="Имя"
-             class="h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
-           />
-           <!-- Error Message -->
-           <span
-             class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
-             >Имя не может быть короче 3х символов</span
-           >
-         </label>
+          <!-- Form -->
+          <div
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-5 sm:gap-y-7 lg:gap-y-14 mt-10 2xl:mt-20"
+          >
+            <!-- Name -->
+            <label for="name" class="space-y-2.5 relative">
+              <span class="block font-medium text-white">Ваше имя?*</span>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Имя"
+                class="h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+              />
+              <!-- Error Message -->
+              <span
+                class="text-xs sm:text-sm absolute block -bottom-2 sm:-bottom-5 text-left font-medium text-brand-red"
+                >Имя не может быть короче 3х символов</span
+              >
+            </label>
 
-         <!-- How To Connect With You? -->
-         <div
-           class="relative space-y-2.5"
-           x-data="{
+            <!-- How To Connect With You? -->
+            <div
+              class="relative space-y-2.5"
+              x-data="{
              open: false,
              selected: 'Звонок, telegram, Whats App',
              options: [
@@ -988,83 +991,83 @@
                this.open = false;
              }
            }"
-           @click.away="open = false"
-         >
-           <span class="block text-left font-medium text-white"
-             >Как с Вами связаться?*</span
-           >
-           <div class="relative max-w-full">
-             <button
-               type="button"
-               @click="open = !open"
-               class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
-               :class="{
+              @click.away="open = false"
+            >
+              <span class="block text-left font-medium text-white"
+                >Как с Вами связаться?*</span
+              >
+              <div class="relative max-w-full">
+                <button
+                  type="button"
+                  @click="open = !open"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  :class="{
                  'text-brand-body': selected !== 'Звонок, telegram, Whats App',
                  'text-brand-gray-300': selected === 'Звонок, telegram, Whats App'
                }"
-             >
-               <span x-text="selected"></span>
-               <svg
-                 width="16"
-                 height="10"
-                 viewBox="0 0 16 10"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 :class="{ 'rotate-180': open }"
-                 class="transition-transform duration-200"
-               >
-                 <path
-                   fill-rule="evenodd"
-                   clip-rule="evenodd"
-                   d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
-                   fill="#4A5565"
-                 />
-               </svg>
-             </button>
-             <!-- Dropdown Menu -->
-             <div
-               x-show="open"
-               x-transition:enter="transition ease-out duration-200"
-               x-transition:enter-start="opacity-0 transform scale-95"
-               x-transition:enter-end="opacity-100 transform scale-100"
-               x-transition:leave="transition ease-in duration-150"
-               x-transition:leave-start="opacity-100 transform scale-100"
-               x-transition:leave-end="opacity-0 transform scale-95"
-               class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
-               style="display: none"
-             >
-               <template x-for="option in options" :key="option">
-                 <button
-                   type="button"
-                   @click="selectOption(option)"
-                   class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
-                   :class="{ 'bg-brand-sky-200 text-white': selected === option }"
-                 >
-                   <span x-text="option"></span>
-                 </button>
-               </template>
-             </div>
-           </div>
-           <!-- Hidden input for form submission -->
-           <input type="hidden" name="contact_method" :value="selected" />
-         </div>
+                >
+                  <span x-text="selected"></span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 16 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    :class="{ 'rotate-180': open }"
+                    class="transition-transform duration-200"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
+                      fill="#4A5565"
+                    />
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform scale-95"
+                  x-transition:enter-end="opacity-100 transform scale-100"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 transform scale-100"
+                  x-transition:leave-end="opacity-0 transform scale-95"
+                  class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
+                  style="display: none"
+                >
+                  <template x-for="option in options" :key="option">
+                    <button
+                      type="button"
+                      @click="selectOption(option)"
+                      class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
+                      :class="{ 'bg-brand-sky-200 text-white': selected === option }"
+                    >
+                      <span x-text="option"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <!-- Hidden input for form submission -->
+              <input type="hidden" name="contact_method" :value="selected" />
+            </div>
 
-         <!-- Phone -->
-         <label for="phone" class="space-y-2.5">
-           <span class="block font-medium text-white">Ваш телефон*</span>
-           <input
-             type="text"
-             id="phone"
-             name="phone"
-             placeholder="+7 888 888 88 88"
-             class="w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
-           />
-         </label>
+            <!-- Phone -->
+            <label for="phone" class="space-y-2.5">
+              <span class="block font-medium text-white">Ваш телефон*</span>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                placeholder="+7 888 888 88 88"
+                class="w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+              />
+            </label>
 
-         <!-- Convenient Time for a Call -->
-         <div
-           class="relative space-y-2.5"
-           x-data="{
+            <!-- Convenient Time for a Call -->
+            <div
+              class="relative space-y-2.5"
+              x-data="{
              open: false,
              selected: 'Как можно скорее',
              options: [
@@ -1078,115 +1081,115 @@
                this.open = false;
              }
            }"
-           @click.away="open = false"
-         >
-           <span class="block text-left font-medium text-white"
-             >Удобное время для звонка:</span
-           >
-           <div class="relative">
-             <button
-               type="button"
-               @click="open = !open"
-               class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
-               :class="{
+              @click.away="open = false"
+            >
+              <span class="block text-left font-medium text-white"
+                >Удобное время для звонка:</span
+              >
+              <div class="relative">
+                <button
+                  type="button"
+                  @click="open = !open"
+                  class="h-16 w-full flex-between bg-white rounded-brand-2xl font-medium text-left outline-none focus:ring-2 focus:ring-brand-blue-100 py-5 px-8"
+                  :class="{
                  'text-brand-body': selected !== 'Как можно скорее',
                  'text-brand-gray-300': selected === 'Как можно скорее'
                }"
-             >
-               <span x-text="selected"></span>
-               <svg
-                 width="16"
-                 height="10"
-                 viewBox="0 0 16 10"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 :class="{ 'rotate-180': open }"
-                 class="transition-transform duration-200"
-               >
-                 <path
-                   fill-rule="evenodd"
-                   clip-rule="evenodd"
-                   d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
-                   fill="#4A5565"
-                 />
-               </svg>
-             </button>
-             <!-- Dropdown Menu -->
-             <div
-               x-show="open"
-               x-transition:enter="transition ease-out duration-200"
-               x-transition:enter-start="opacity-0 transform scale-95"
-               x-transition:enter-end="opacity-100 transform scale-100"
-               x-transition:leave="transition ease-in duration-150"
-               x-transition:leave-start="opacity-100 transform scale-100"
-               x-transition:leave-end="opacity-0 transform scale-95"
-               class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
-               style="display: none"
-             >
-               <template x-for="option in options" :key="option">
-                 <button
-                   type="button"
-                   @click="selectOption(option)"
-                   class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
-                   :class="{ 'bg-brand-sky-200 text-white': selected === option }"
-                 >
-                   <span x-text="option"></span>
-                 </button>
-               </template>
-             </div>
-           </div>
-           <!-- Hidden input for form submission -->
-           <input type="hidden" name="contact_method" :value="selected" />
-         </div>
+                >
+                  <span x-text="selected"></span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 16 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    :class="{ 'rotate-180': open }"
+                    class="transition-transform duration-200"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7.29289 9.67456C7.68342 10.1085 8.31658 10.1085 8.70711 9.67456L15.7071 1.89678C16.0976 1.46287 16.0976 0.759352 15.7071 0.325437C15.3166 -0.108479 14.6834 -0.108479 14.2929 0.325437L8 7.31754L1.70711 0.325437C1.31658 -0.108479 0.683417 -0.108479 0.292893 0.325437C-0.0976311 0.759352 -0.0976311 1.46287 0.292893 1.89678L7.29289 9.67456Z"
+                      fill="#4A5565"
+                    />
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform scale-95"
+                  x-transition:enter-end="opacity-100 transform scale-100"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 transform scale-100"
+                  x-transition:leave-end="opacity-0 transform scale-95"
+                  class="absolute z-50 w-full mt-2 bg-white rounded-brand-2xl shadow-lg overflow-hidden"
+                  style="display: none"
+                >
+                  <template x-for="option in options" :key="option">
+                    <button
+                      type="button"
+                      @click="selectOption(option)"
+                      class="w-full text-left px-8 py-4 font-medium text-brand-gray-300 hover:bg-brand-sky-200 hover:text-white transition-colors duration-150"
+                      :class="{ 'bg-brand-sky-200 text-white': selected === option }"
+                    >
+                      <span x-text="option"></span>
+                    </button>
+                  </template>
+                </div>
+              </div>
+              <!-- Hidden input for form submission -->
+              <input type="hidden" name="contact_method" :value="selected" />
+            </div>
 
-         <!-- Message -->
-         <label for="message" class="sm:col-span-2 space-y-2.5">
-           <span class="block font-medium text-white">Текст сообщения:</span>
-           <textarea
-             id="message"
-             name="message"
-             placeholder="Текст сообщения"
-             class="h-28 lg:h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 resize-none py-5 px-7"
-           ></textarea>
-         </label>
+            <!-- Message -->
+            <label for="message" class="sm:col-span-2 space-y-2.5">
+              <span class="block font-medium text-white">Текст сообщения:</span>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Текст сообщения"
+                class="h-28 lg:h-16 w-full bg-white rounded-brand-2xl placeholder:font-medium placeholder:text-brand-gray-300 outline-none focus:ring-2 focus:ring-brand-blue-100 resize-none py-5 px-7"
+              ></textarea>
+            </label>
 
-         <label
-           class="sm:col-span-2 lg:col-span-3 flex gap-2.5 text-white cursor-pointer lg:-mt-10"
-         >
-           <div
-             class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
-           >
-             <input type="checkbox" class="hidden peer" />
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke-width="1.5"
-               stroke="currentColor"
-               class="size-3 stroke-black opacity-0 peer-checked:opacity-100 smooth"
-             >
-               <path
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 d="m4.5 12.75 6 6 9-13.5"
-               />
-             </svg>
-           </div>
+            <label
+              class="sm:col-span-2 lg:col-span-3 flex gap-2.5 text-white cursor-pointer lg:-mt-10"
+            >
+              <div
+                class="size-4 shrink-0 flex-center bg-white border border-brand-gray-300 rounded"
+              >
+                <input type="checkbox" class="hidden peer" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-3 stroke-black opacity-0 peer-checked:opacity-100 smooth"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 12.75 6 6 9-13.5"
+                  />
+                </svg>
+              </div>
 
-           <span
-             >Я соглашаюсь с условиями обработки персональных данных и
-             правилами сайта</span
-           >
-         </label>
+              <span
+                >Я соглашаюсь с условиями обработки персональных данных и
+                правилами сайта</span
+              >
+            </label>
 
-         <div class="sm:col-span-2 lg:col-span-3 flex-center mt-6 sm:mt-0">
-           <button
-             class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
-           >
-             Отправить
-           </button>
-         </div>
-       </div>
+            <div class="sm:col-span-2 lg:col-span-3 flex-center mt-6 sm:mt-0">
+              <button
+                class="w-70 h-17.5 bg-btn font-bold text-white text-xl/7.5 rounded-brand-2xl hover:opacity-80 smooth py-5 px-8 md:px-12"
+              >
+                Отправить
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1259,7 +1262,9 @@
     <footer id="footer" class="relative bg-brand-sky-400 text-white pt-8 pb-16">
       <div class="container-base">
         <!-- Top -->
-        <div class="flex-between flex-col lg:flex-row items-start gap-10">
+        <div
+          class="flex-between flex-col lg:flex-row items-center lg:items-start gap-10"
+        >
           <div class="">
             <a href="#">
               <img src="./assets/images/logo-footer.png" alt="Logo" />
@@ -1302,7 +1307,7 @@
             </ul>
           </div>
 
-          <div class="flex flex-col lg:items-end space-y-5 pl-8 sm:pl-0">
+          <div class="flex flex-col lg:items-end space-y-5">
             <div
               class="flex flex-row-reverse lg:flex-row items-center gap-5.5 lg:pr-6"
             >
@@ -1341,7 +1346,7 @@
                 >
               </div>
             </div>
-            <div class="flex lg:hidden items-center gap-5">
+            <div class="flex lg:hidden items-center justify-center gap-5">
               <a href="#" class="block hover:-translate-y-2 smooth">
                 <img src="./assets/svgs/youtube.svg" alt="Youtube" />
               </a>
