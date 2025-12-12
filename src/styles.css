@@ -54,6 +54,9 @@
   --radius-brand-2xl: 1.25rem;
 
   --shadow-box: 0px 0px 9.83px 0px #8c8c8c40;
+  --shadow-about-links: 0px -9.83px 9.83px -9.83px #8c8c8c40,
+    9.83px 0px 9.83px -9.83px #8c8c8c40, 0px 9.83px 9.83px -9.83px #8c8c8c40;
+
   --shadow-project: 0px 0px 10.49px 0px #8c8c8c40;
 }
 

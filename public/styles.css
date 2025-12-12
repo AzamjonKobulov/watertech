@@ -291,9 +291,6 @@
   .top-5 {
     top: calc(var(--spacing) * 5);
   }
-  .top-12 {
-    top: calc(var(--spacing) * 12);
-  }
   .-right-1 {
     right: calc(var(--spacing) * -1);
   }
@@ -320,9 +317,6 @@
   }
   .-bottom-2 {
     bottom: calc(var(--spacing) * -2);
-  }
-  .-bottom-20 {
-    bottom: calc(var(--spacing) * -20);
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
@@ -428,9 +422,6 @@
   .-mt-18 {
     margin-top: calc(var(--spacing) * -18);
   }
-  .-mt-44 {
-    margin-top: calc(var(--spacing) * -44);
-  }
   .-mt-66 {
     margin-top: calc(var(--spacing) * -66);
   }
@@ -493,6 +484,9 @@
   }
   .mt-28 {
     margin-top: calc(var(--spacing) * 28);
+  }
+  .-mr-7 {
+    margin-right: calc(var(--spacing) * -7);
   }
   .-mb-4 {
     margin-bottom: calc(var(--spacing) * -4);
@@ -684,6 +678,9 @@
   .w-1\/2 {
     width: calc(1/2 * 100%);
   }
+  .w-1\/3 {
+    width: calc(1/3 * 100%);
+  }
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
@@ -719,9 +716,6 @@
   }
   .w-206 {
     width: calc(var(--spacing) * 206);
-  }
-  .w-\[28\%\] {
-    width: 28%;
   }
   .w-full {
     width: 100%;
@@ -912,9 +906,6 @@
   }
   .justify-center {
     justify-content: center;
-  }
-  .justify-end {
-    justify-content: flex-end;
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
@@ -1284,9 +1275,6 @@
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
   }
-  .py-9 {
-    padding-block: calc(var(--spacing) * 9);
-  }
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
   }
@@ -1326,8 +1314,8 @@
   .pr-6 {
     padding-right: calc(var(--spacing) * 6);
   }
-  .pr-20 {
-    padding-right: calc(var(--spacing) * 20);
+  .pr-10 {
+    padding-right: calc(var(--spacing) * 10);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -1374,8 +1362,8 @@
   .pl-3\.5 {
     padding-left: calc(var(--spacing) * 3.5);
   }
-  .pl-10 {
-    padding-left: calc(var(--spacing) * 10);
+  .pl-5 {
+    padding-left: calc(var(--spacing) * 5);
   }
   .pl-16 {
     padding-left: calc(var(--spacing) * 16);
@@ -1485,6 +1473,10 @@
     --tw-leading: calc(var(--spacing) * 7.5);
     line-height: calc(var(--spacing) * 7.5);
   }
+  .leading-10 {
+    --tw-leading: calc(var(--spacing) * 10);
+    line-height: calc(var(--spacing) * 10);
+  }
   .leading-17 {
     --tw-leading: calc(var(--spacing) * 17);
     line-height: calc(var(--spacing) * 17);
@@ -1556,6 +1548,10 @@
   }
   .shadow-\[0_4px_20px_rgba\(0\,0\,0\,0\.08\)\] {
     --tw-shadow: 0 4px 20px var(--tw-shadow-color, rgba(0,0,0,0.08));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-about-links {
+    --tw-shadow: 0px -9.83px 9.83px -9.83px var(--tw-shadow-color, #8c8c8c40), 9.83px 0px 9.83px -9.83px var(--tw-shadow-color, #8c8c8c40), 0px 9.83px 9.83px -9.83px var(--tw-shadow-color, #8c8c8c40);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-box {
@@ -1681,34 +1677,10 @@
       inset: calc(var(--spacing) * 0);
     }
   }
-  .after\:-z-10 {
-    &::after {
-      content: var(--tw-content);
-      z-index: calc(10 * -1);
-    }
-  }
-  .after\:-z-20 {
-    &::after {
-      content: var(--tw-content);
-      z-index: calc(20 * -1);
-    }
-  }
-  .after\:z-0 {
-    &::after {
-      content: var(--tw-content);
-      z-index: 0;
-    }
-  }
   .after\:z-10 {
     &::after {
       content: var(--tw-content);
       z-index: 10;
-    }
-  }
-  .after\:z-20 {
-    &::after {
-      content: var(--tw-content);
-      z-index: 20;
     }
   }
   .after\:bg-hero {
@@ -2919,11 +2891,6 @@
       aspect-ratio: auto;
     }
   }
-  .\32 xl\:w-1\/3 {
-    @media (width >= 96rem) {
-      width: calc(1/3 * 100%);
-    }
-  }
   .\32 xl\:object-fill {
     @media (width >= 96rem) {
       object-fit: fill;
@@ -2937,6 +2904,11 @@
   .\32 xl\:pt-100 {
     @media (width >= 96rem) {
       padding-top: calc(var(--spacing) * 100);
+    }
+  }
+  .\32 xl\:pl-0 {
+    @media (width >= 96rem) {
+      padding-left: calc(var(--spacing) * 0);
     }
   }
   .\[\&\:\:-webkit-scrollbar\]\:hidden {
