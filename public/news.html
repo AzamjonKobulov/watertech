@@ -27,6 +27,7 @@
       shadowThreshold: 200,
       showShadow: false,
       mobileMenuOpen: false,
+      currentPath: '',
       currentPage: 1,
       itemsPerPage: 10,
       news: [
@@ -109,6 +110,8 @@
       },
       init() {
         this.lastScroll = window.pageYOffset || document.documentElement.scrollTop;
+        this.currentPath = window.location.pathname;
+        
         window.addEventListener('scroll', () => {
           const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
           
@@ -125,8 +128,25 @@
           
           this.lastScroll = currentScroll;
         });
+      },
+      isActive(path) {
+        if (path === './index.html#contacts') {
+          return window.location.hash === '#contacts';
+        }
+        if (path === './index.html') {
+          return this.currentPath.includes('index.html') && 
+                 !this.currentPath.includes('index-2.html') && 
+                 !this.currentPath.includes('about.html') &&
+                 !this.currentPath.includes('project') &&
+                 !this.currentPath.includes('engineering.html') &&
+                 !this.currentPath.includes('equipment.html') &&
+                 window.location.hash !== '#contacts';
+        }
+        const fileName = path.replace('./', '');
+        return this.currentPath.includes(fileName);
       }
     }"
+    :class="{ 'overflow-hidden': mobileMenuOpen }"
   >
     <!-- HEADER -->
     <header
@@ -252,29 +272,7 @@
               class="lg:hidden"
               :aria-expanded="mobileMenuOpen"
             >
-              <img
-                src="./assets/svgs/hamburger.svg"
-                alt="Menu Button"
-                x-show="!mobileMenuOpen"
-              />
-              <svg
-                x-show="mobileMenuOpen"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="transition-opacity duration-200"
-                style="display: none"
-              >
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              <img src="./assets/svgs/hamburger.svg" alt="Menu Button" />
             </button>
           </div>
         </div>
@@ -625,12 +623,12 @@
       <!-- Let's Discuss Your Task -->
       <section
         id="lets-discuss-your-task"
-        class="relative pb-30 pt-40 sm:pt-64 lg:pt-120 2xl:pt-100"
+        class="relative pb-30 pt-40 lg:pt-96"
       >
         <img
           src="./assets/images/water-3.png"
           alt="Water Image"
-          class="absolute top-0 w-full h-full object-cover -z-10"
+          class="absolute top-0 w-full h-full object-cover object-left lg:object-center -z-10"
         />
         <div class="container-base">
           <h2
