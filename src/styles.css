@@ -275,6 +275,7 @@
 .framed-content-bg {
   @apply absolute inset-0 bg-white;
   margin: 2px;
+  display: none;
 }
 
 .framed-content-inner {
@@ -289,5 +290,5 @@
 
 .framed-content-overlay {
   @apply absolute inset-0 size-full pointer-events-none z-20;
-  object-fit: fill;
+  object-fit: contain;
 }
