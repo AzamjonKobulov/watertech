@@ -261,12 +261,45 @@
   @apply text-sm/5.5 mt-3;
 }
 
+.news-detail-content h2 {
+  @apply max-w-4xl;
+}
+
+.news-detail-content blockquote {
+  @apply bg-white leading-5 font-bold text-brand-sky-300 rounded-brand-2xl shadow-box lg:my-10 py-8 px-5 lg:p-6;
+}
+
+.news-detail-content ul {
+  @apply space-y-3 sm:space-y-0;
+}
+
+.news-detail-content .news-detail-list {
+  @apply space-y-3 sm:space-y-0;
+}
+
+.news-detail-content .news-detail-list li {
+  @apply flex items-center gap-5;
+}
+
+.news-detail-content .news-detail-list li span {
+  @apply w-7 text-xl/8 font-bold text-brand-sky-300;
+}
+
+.news-detail-content .news-detail-image {
+  @apply h-60 sm:h-80 lg:h-120 rounded-brand-2xl overflow-hidden mt-10 lg:mt-16;
+}
+
+.news-detail-content .news-detail-image img {
+  @apply size-full object-cover;
+}
+
 .projects-content ul li,
 .equipment-content ul li,
 .one-line-content ul li,
 .about-list ul li,
 .engineering-list ul li,
-.project-list ul li {
+.project-list ul li,
+.news-detail-content ul:not(.news-detail-list) li {
   @apply flex gap-2 before:block before:size-0.5 before:shrink-0 before:bg-black before:rounded-full before:mt-2.5;
 }
 
