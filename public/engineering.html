@@ -64,7 +64,13 @@
                  window.location.hash !== '#contacts';
         }
         const fileName = path.replace('./', '');
-        return this.currentPath.includes(fileName);
+        // More precise matching - check if pathname ends with or contains the filename
+        // Handle various path formats: /equipment.html, /public/equipment.html, equipment.html
+        return this.currentPath.endsWith(fileName) || 
+               this.currentPath.endsWith('/' + fileName) ||
+               this.currentPath.includes('/' + fileName) ||
+               this.currentPath === '/' + fileName ||
+               this.currentPath === fileName;
       }
     }"
     :class="{ 'overflow-hidden': mobileMenuOpen || showSuccessModal }"

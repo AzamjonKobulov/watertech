@@ -59,7 +59,13 @@
                  window.location.hash !== '#contacts';
         }
         const fileName = path.replace('./', '');
-        return this.currentPath.includes(fileName);
+        // More precise matching - check if pathname ends with or contains the filename
+        // Handle various path formats: /equipment.html, /public/equipment.html, equipment.html
+        return this.currentPath.endsWith(fileName) || 
+               this.currentPath.endsWith('/' + fileName) ||
+               this.currentPath.includes('/' + fileName) ||
+               this.currentPath === '/' + fileName ||
+               this.currentPath === fileName;
       }
     }"
     :class="{ 'overflow-hidden': mobileMenuOpen || showSuccessModal }"
@@ -304,42 +310,70 @@
             <a
               href="./index.html"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./index.html'),
+                'text-brand-body': !isActive('./index.html')
+              }"
               @click="mobileMenuOpen = false"
               >Главная</a
             >
             <a
               href="./about.html"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./about.html'),
+                'text-brand-body': !isActive('./about.html')
+              }"
               @click="mobileMenuOpen = false"
               >О компании</a
             >
             <a
               href="./project-management.html"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./project-management.html'),
+                'text-brand-body': !isActive('./project-management.html')
+              }"
               @click="mobileMenuOpen = false"
               >Проектное управление</a
             >
             <a
               href="./engineering.html"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./engineering.html'),
+                'text-brand-body': !isActive('./engineering.html')
+              }"
               @click="mobileMenuOpen = false"
               >Инжиниринг и проектирование</a
             >
             <a
               href="./projects.html"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./projects.html'),
+                'text-brand-body': !isActive('./projects.html')
+              }"
               @click="mobileMenuOpen = false"
               >Наши проекты</a
             >
             <a
               href="./equipment.html"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./equipment.html'),
+                'text-brand-body': !isActive('./equipment.html')
+              }"
               @click="mobileMenuOpen = false"
               >Оборудование</a
             >
             <a
               href="./index.html#contacts"
               class="nav-link block h-9 relative hover:text-brand-sky-200 smooth"
+              :class="{
+                'font-bold text-brand-sky-300': isActive('./index.html#contacts'),
+                'text-brand-body': !isActive('./index.html#contacts')
+              }"
               @click="mobileMenuOpen = false"
               >Контакты</a
             >
