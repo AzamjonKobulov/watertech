@@ -23,6 +23,8 @@
   --color-brand-body: #4a5565;
 
   --background-image-water: url("./assets/images/water-2.png");
+  --background-image-hero-section: url("./assets/images/bg-hero.png");
+  --background-image-license: url("./assets/images/bg-license.png");
 
   --background-image-hero: linear-gradient(
     0deg,
@@ -168,11 +170,11 @@
   }
 
   .content ul {
-    @apply list-disc list-inside pl-1 lg:pl-3 text-xs/5 sm:text-sm/5.5;
+    @apply sm:pl-3 text-xs/5 sm:text-sm/5.5;
   }
 
   .content ol {
-    @apply list-decimal list-inside pl-1 lg:pl-3 text-xs/5 sm:text-sm/5.5;
+    @apply list-decimal sm:list-inside sm:pl-3 text-xs/5 sm:text-sm/5.5;
   }
 
   .content li {
@@ -224,10 +226,10 @@
 }
 
 .projects-content ul {
-  @apply list-disc list-inside pl-1 lg:pl-3 text-xs/5 sm:text-sm/6 mt-6 lg:mt-8;
+  @apply sm:pl-3 text-xs/5 sm:text-sm/6 mt-6 lg:mt-8;
 }
 
-.projects-content div {
+.projects-content blockquote {
   @apply max-w-244 ml-auto bg-white leading-5 font-medium text-brand-sky-300 rounded-brand-2xl shadow-box mt-10 sm:mt-20 p-6 lg:px-9 lg:py-5.5;
 }
 
@@ -240,7 +242,7 @@
 }
 
 .equipment-content ul {
-  @apply list-disc list-inside sm:space-y-3 pl-1 lg:pl-3 text-xs/5 sm:text-sm/6 mt-6 lg:mt-8;
+  @apply sm:space-y-3 sm:pl-3 text-xs/5 sm:text-sm/6 mt-6 lg:mt-8;
 }
 
 .one-line-content {
@@ -256,7 +258,16 @@
 }
 
 .one-line-content ul {
-  @apply text-sm/5.5 list-disc list-inside mt-3;
+  @apply text-sm/5.5 mt-3;
+}
+
+.projects-content ul li,
+.equipment-content ul li,
+.one-line-content ul li,
+.about-list ul li,
+.engineering-list ul li,
+.project-list ul li {
+  @apply flex gap-2 before:block before:size-0.5 before:shrink-0 before:bg-black before:rounded-full before:mt-2.5;
 }
 
 .scrollbar-hidden {
@@ -291,4 +302,27 @@
 .framed-content-overlay {
   @apply absolute inset-0 size-full pointer-events-none z-20;
   object-fit: contain;
+}
+
+/* Phone and Email Icons as Pseudo-elements */
+.icon-phone::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url("./assets/svgs/call.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-email::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url("./assets/svgs/envelope.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }

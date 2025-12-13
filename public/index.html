@@ -551,12 +551,10 @@
     <!-- MAIN -->
     <main>
       <!-- Hero -->
-      <section id="hero" class="relative pb-80 lg:pb-127 pt-6">
-        <img
-          src="./assets/images/bg-hero.png"
-          alt="Background Hero"
-          class="absolute inset-y-0 left-0 z-10 w-full h-full object-cover 2xl:object-fill -top-20"
-        />
+      <section
+        id="hero"
+        class="relative bg-hero-section bg-cover bg-center 2xl:bg-bottom pb-80 lg:pb-120 pt-6"
+      >
         <div class="container-base relative z-20">
           <h2 class="leading-17.5">Создаем решения для</h2>
           <h1
@@ -593,7 +591,7 @@
       <!-- Areas of Activity -->
       <section
         id="areas-of-activity"
-        class="bg-areas-of-activity relative -mt-66 pb-12 sm:pb-16 md:pb-24 lg:pb-40"
+        class="relative after:content-[''] after:absolute after:inset-0 after:bg-areas-of-activity after:top-40 -mt-40 pb-12 sm:pb-16 md:pb-24 lg:pb-40"
       >
         <div class="space-y-10 lg:space-y-16">
           <div class="container-base relative z-20 space-y-5">
@@ -1713,7 +1711,7 @@
                       @click="scrollTabIntoView(tab.id, $event)"
                       class="h-9 relative hover:text-brand-sky-200 smooth transition-colors duration-200 pb-6 whitespace-nowrap"
                       :class="{
-                        'text-brand-sky-200': activeTab === tab.id,
+                        'text-brand-sky-200 font-bold': activeTab === tab.id,
                         'text-brand-body': activeTab !== tab.id
                       }"
                     >
@@ -1801,12 +1799,10 @@
       </section>
 
       <!-- Licenses -->
-      <section id="licenses" class="relative pb-16 sm:pb-24">
-        <img
-          src="./assets/images/bg-license.png"
-          alt="Bg Licenses"
-          class="absolute top-0 left-0 -z-10 w-full h-full object-cover 2xl:object-fill"
-        />
+      <section
+        id="licenses"
+        class="relative bg-base bg-cover bg-center pb-16 sm:pb-24"
+      >
         <div class="container-base space-y-9 lg:space-y-17">
           <div class="space-y-5">
             <h2>Лицензии</h2>
@@ -2617,9 +2613,7 @@
                 </a>
               </div>
               <div class="flex items-center gap-5.5">
-                <div>
-                  <img src="./assets/svgs/call.svg" alt="Call" />
-                </div>
+                <div class="icon-phone"></div>
                 <div>
                   <p class="text-sm font-medium">Телефон</p>
                   <a
@@ -2631,9 +2625,7 @@
               </div>
             </div>
             <div class="flex items-center gap-5.5">
-              <div>
-                <img src="./assets/svgs/envelope.svg" alt="Email" />
-              </div>
+              <div class="icon-email"></div>
               <div>
                 <p class="text-sm font-medium">Электронная почта</p>
                 <a

@@ -682,9 +682,9 @@
 
     <!-- MAIN -->
     <main>
-      <!-- Path -->
+      <!-- Breadcrumbs -->
       <div
-        class="container-base flex items-center gap-4 font-light text-xs whitespace-nowrap flex-wrap lg:mt-7"
+        class="container-base flex items-center gap-4 font-light text-xs flex-wrap lg:mt-7"
       >
         <span>Главная</span>
         <span class="w-6 h-px bg-brand-gray-400 shrink-0"></span>
@@ -738,12 +738,12 @@
               </li>
             </ul>
 
-            <div>
+            <blockquote>
               Наши проекты отражают комплексный подход к решению водных проблем
               в промышленности, сочетая в себе инновации и надёжность. Каждый
               реализованный нами объект становится важным вкладом в сохранение
               природных ресурсов и экологическую безопасность.
-            </div>
+            </blockquote>
           </div>
         </div>
 
@@ -751,7 +751,7 @@
         <div class="space-y-5 sm:space-y-15 mt-14">
           <!-- Tabs -->
           <div
-            class="container-base flex items-start gap-10 lg:gap-16 text-brand-body whitespace-nowrap overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] px-5 lg:px-5"
+            class="container-base flex flex-col-reverse sm:flex-row items-center gap-2.5 sm:gap-10 lg:gap-16 text-brand-body whitespace-nowrap [scrollbar-width:none] px-5 lg:px-5"
           >
             <button
               @click="setTab('completed')"
@@ -1220,9 +1220,7 @@
                 </a>
               </div>
               <div class="flex items-center gap-5.5">
-                <div>
-                  <img src="./assets/svgs/call.svg" alt="Call" />
-                </div>
+                <div class="icon-phone"></div>
                 <div>
                   <p class="text-sm font-medium">Телефон</p>
                   <a
@@ -1234,9 +1232,7 @@
               </div>
             </div>
             <div class="flex items-center gap-5.5">
-              <div>
-                <img src="./assets/svgs/envelope.svg" alt="Email" />
-              </div>
+              <div class="icon-email"></div>
               <div>
                 <p class="text-sm font-medium">Электронная почта</p>
                 <a

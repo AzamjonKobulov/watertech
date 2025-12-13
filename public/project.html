@@ -550,9 +550,9 @@
 
     <!-- MAIN -->
     <main class="overflow-hidden">
-      <!-- Path -->
+      <!-- Breadcrumbs -->
       <div
-        class="container-base flex items-center gap-4 font-light text-xs whitespace-nowrap flex-wrap lg:mt-7"
+        class="container-base flex items-center gap-4 font-light text-xs flex-wrap lg:mt-7"
       >
         <span>Главная</span>
         <span class="w-6 h-px bg-brand-gray-400 shrink-0"></span>
@@ -581,9 +581,9 @@
                   <li>
                     <span class="font-bold">Заказчик: </span> РОСВОДОКАНАЛ
                   </li>
-                  <li>
+                  <li class="project-list">
                     <span class="font-bold">Цель:</span>
-                    <ul class="list-disc list-inside pl-3">
+                    <ul class="">
                       <li>
                         увеличение производительности КОС по входному потоку
                         сточных вод с 220 до 260 тыс. м3/сут.;
@@ -609,7 +609,9 @@
                 />
               </div>
             </div>
-            <div class="bg-white shadow-box rounded-3xl p-5 sm:p-8">
+            <div
+              class="project-list bg-white shadow-box rounded-3xl p-5 sm:p-8"
+            >
               <h3
                 class="leading-7.5 text-2xl sm:leading-10 font-bold text-brand-sky-300"
               >
@@ -617,7 +619,7 @@
               </h3>
 
               <ul
-                class="text-xs/5 sm:text-sm/10 sm:space-y-2 list-disc list-inside mt-5 pl-3"
+                class="text-xs/5 sm:text-sm/5 sm:space-y-4 font-light mt-5 pl-3"
               >
                 <li>строительство</li>
                 <li>строительство дополнительных вторичных отстойников;</li>
@@ -706,7 +708,7 @@
                       1024: {
                         centeredSlides: true,
                         initialSlide: 1,
-
+                        loop: true,
                       },
                     },
                     navigation: {
@@ -758,66 +760,108 @@
                   <div
                     class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
                   >
-                    <img
-                      src="./assets/images/project-detail-1.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
+                    <a
+                      href="./assets/images/project-detail-1.png"
+                      data-fancybox="project-images"
+                      data-caption="Project Detail"
+                      class="lg:pointer-events-none cursor-pointer block size-full"
+                    >
+                      <img
+                        src="./assets/images/project-detail-1.png"
+                        alt="Project Detail"
+                        class="size-full object-cover"
+                      />
+                    </a>
                   </div>
                 </div>
                 <div class="swiper-slide">
                   <div
                     class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
                   >
-                    <img
-                      src="./assets/images/project-detail-2.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
+                    <a
+                      href="./assets/images/project-detail-2.png"
+                      data-fancybox="project-images"
+                      data-caption="Project Detail"
+                      class="lg:pointer-events-none cursor-pointer block size-full"
+                    >
+                      <img
+                        src="./assets/images/project-detail-2.png"
+                        alt="Project Detail"
+                        class="size-full object-cover"
+                      />
+                    </a>
                   </div>
                 </div>
                 <div class="swiper-slide">
                   <div
                     class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
                   >
-                    <img
-                      src="./assets/images/project-detail-3.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
+                    <a
+                      href="./assets/images/project-detail-3.png"
+                      data-fancybox="project-images"
+                      data-caption="Project Detail"
+                      class="lg:pointer-events-none cursor-pointer block size-full"
+                    >
+                      <img
+                        src="./assets/images/project-detail-3.png"
+                        alt="Project Detail"
+                        class="size-full object-cover"
+                      />
+                    </a>
                   </div>
                 </div>
                 <div class="swiper-slide">
                   <div
                     class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
                   >
-                    <img
-                      src="./assets/images/project-detail-1.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
+                    <a
+                      href="./assets/images/project-detail-1.png"
+                      data-fancybox="project-images"
+                      data-caption="Project Detail"
+                      class="lg:pointer-events-none cursor-pointer block size-full"
+                    >
+                      <img
+                        src="./assets/images/project-detail-1.png"
+                        alt="Project Detail"
+                        class="size-full object-cover"
+                      />
+                    </a>
                   </div>
                 </div>
                 <div class="swiper-slide">
                   <div
                     class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
                   >
-                    <img
-                      src="./assets/images/project-detail-2.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
+                    <a
+                      href="./assets/images/project-detail-2.png"
+                      data-fancybox="project-images"
+                      data-caption="Project Detail"
+                      class="lg:pointer-events-none cursor-pointer block size-full"
+                    >
+                      <img
+                        src="./assets/images/project-detail-2.png"
+                        alt="Project Detail"
+                        class="size-full object-cover"
+                      />
+                    </a>
                   </div>
                 </div>
                 <div class="swiper-slide">
                   <div
                     class="aspect-square sm:aspect-video 2xl:aspect-auto rounded-3xl overflow-hidden"
                   >
-                    <img
-                      src="./assets/images/project-detail-3.png"
-                      alt="Project Detail"
-                      class="size-full object-cover"
-                    />
+                    <a
+                      href="./assets/images/project-detail-3.png"
+                      data-fancybox="project-images"
+                      data-caption="Project Detail"
+                      class="lg:pointer-events-none cursor-pointer block size-full"
+                    >
+                      <img
+                        src="./assets/images/project-detail-3.png"
+                        alt="Project Detail"
+                        class="size-full object-cover"
+                      />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -1521,9 +1565,7 @@
                 </a>
               </div>
               <div class="flex items-center gap-5.5">
-                <div>
-                  <img src="./assets/svgs/call.svg" alt="Call" />
-                </div>
+                <div class="icon-phone"></div>
                 <div>
                   <p class="text-sm font-medium">Телефон</p>
                   <a
@@ -1535,9 +1577,7 @@
               </div>
             </div>
             <div class="flex items-center gap-5.5">
-              <div>
-                <img src="./assets/svgs/envelope.svg" alt="Email" />
-              </div>
+              <div class="icon-email"></div>
               <div>
                 <p class="text-sm font-medium">Электронная почта</p>
                 <a
@@ -1612,5 +1652,49 @@
     <!-- Fancybox JS -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="./js/script.js"></script>
+    <script>
+      // Initialize Fancybox for project images
+      function initFancybox() {
+        if (typeof Fancybox !== "undefined") {
+          // Unbind existing to avoid duplicates
+          Fancybox.unbind('[data-fancybox="project-images"]');
+
+          // Bind Fancybox
+          Fancybox.bind('[data-fancybox="project-images"]', {
+            Toolbar: {
+              display: {
+                left: [],
+                middle: [],
+                right: ["close"],
+              },
+            },
+          });
+        }
+      }
+
+      // Wait for Alpine.js and Fancybox to be ready
+      function tryInitFancybox() {
+        if (typeof Fancybox !== "undefined" && typeof Alpine !== "undefined") {
+          // Wait for Alpine to finish initializing
+          Alpine.nextTick(() => {
+            setTimeout(initFancybox, 200);
+          });
+        } else {
+          setTimeout(tryInitFancybox, 100);
+        }
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", tryInitFancybox);
+      } else {
+        tryInitFancybox();
+      }
+
+      // Reinitialize when Alpine finishes initializing
+      document.addEventListener("alpine:init", () => {
+        setTimeout(initFancybox, 300);
+      });
+    </script>
   </body>
 </html>
